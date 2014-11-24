@@ -8,10 +8,10 @@ public class MoveUp extends Move {
 
 	@Override
 	public void move() {
-		this.getShip().move("up");
+		this.getShip().move("U");
 	}
 	
 	public void undo(){
-		this.getShip().move("down");
+		this.getShip().move("D");
 	}
 }

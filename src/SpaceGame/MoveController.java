@@ -36,15 +36,30 @@ public class MoveController{
 	// =======================================================Class Methods====================================
 	// Generate a random move for a ship
 	public String randomMove(Ship sh){
-		ArrayList<String> possibleMoves = new ArrayList<String>(Arrays.asList("up", "down", "right", "left"));
-		if(sh.getX() == 0) possibleMoves.remove("left");
-		else if(sh.getX() == maxX - 1) possibleMoves.remove("right");
-		if(sh.getY() == 0) possibleMoves.remove("up");
-		else if(sh.getY() == maxY - 1) possibleMoves.remove("down");
+		ArrayList<String> possibleMoves = new ArrayList<String>(Arrays.asList("U", "D", "R", "L", "UL", "UR", "DR", "DL"));
+		if(sh.getX() == 0) {
+			possibleMoves.remove("L");
+			possibleMoves.remove("UL");
+			possibleMoves.remove("DL");
+		}
+		else if(sh.getX() == maxX - 1) {
+			possibleMoves.remove("R");
+			possibleMoves.remove("UR");
+			possibleMoves.remove("DR");
+		}
+		if(sh.getY() == 0) {
+			possibleMoves.remove("U");
+			possibleMoves.remove("UR");
+			possibleMoves.remove("UL");
+		}
+		else if(sh.getY() == maxY - 1) {
+			possibleMoves.remove("D");
+			possibleMoves.remove("DL");
+			possibleMoves.remove("DR");
+		}
 		
 		Random rm = new Random();
 		String move = possibleMoves.get(rm.nextInt(possibleMoves.size()));
-		System.out.println("Random move: " + move);
 		return move;
 	}
 	

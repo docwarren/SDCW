@@ -2,14 +2,14 @@ package SpaceGame;
 import java.util.Random;
 import java.util.Scanner;
 
-public class PlayGame {
+public class ConsoleGame {
 	private static MoveController mc;
 	private static CollisionManager cm;
 	private static MotherShip player;
 	private static ShipFactory shFactory;
 	private static MoveFactory mvFactory;
 	
-	public PlayGame(){}
+	public ConsoleGame(){}
 	
 	public static void main(String[] args) throws MoveControllerException, MotherShipException, CollisionManagerException{
 		mc = MoveController.getInstance(4, 4);
@@ -23,24 +23,29 @@ public class PlayGame {
 		mvFactory = new MoveFactory();
 		String[] shipTypes = {"BattleCruizer", "BattleShooter", "BattleStar"};
 		
-		// Update the game of the players position
-		
 		// Print out all the positions and what ships are at that position
-		for(Position p: cm.getPositions()){
-			System.out.println(p.getX() + ", " + p.getY());
-			for(Ship sh: p.getShips()) System.out.println(sh.getName());
-		}
+		printPositions();
 		
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		
 		// Until the player is dead or the input is "q"
 		while(player.isAlive()){
+			// Take input
 			System.out.println("Enter next move");
 			String input = in.next();
 			
 			if(input.equals("q")) break;
 			else if(input.equals("m")){
+				// Loop through all the positions
+				for(Position p: cm.getPositions()){
+					// For each ship create a new move
+					for(Ship sh: p.getShips()){
+						String moveType = mc.randomMove(sh);			// Randomly generate a move type
+						Move mv = mvFactory.createMove(sh, moveType);	// Create the appropriate move accordingly
+						mc.getCurrentTurn().add(mv);					// Add the moves to the list of moves to be executed this turn
+					}
+				}
 				
 				// Randomly create a new ship;
 				Random r = new Random();
@@ -52,21 +57,15 @@ public class PlayGame {
 					e.notifyObservers();	// Notify the collision manager about the new ship
 				}
 				
-				// Loop through all the positions
-				for(Position p: cm.getPositions()){
-					// For each ship create a new move
-					for(Ship sh: p.getShips()){
-						String moveType = mc.randomMove(sh);			// Randomly generate a move type
-						System.out.println("move type: " + moveType);
-						Move mv = mvFactory.createMove(sh, moveType);	// Create the appropriate move accordingly
-						mc.getCurrentTurn().add(mv);					// Add the moves to the list of moves to be executed this turn
-					}
-				}
 				mc.executeTurn();
 				cm.resolveCollisions(mc);
 				printPositions();
 			}
-			else if(input.equals("s")) player.switchMode();
+			else if(input.equals("s")) {
+				player.switchMode();
+				if(player.isAttacking())System.out.println("Attack mode...");
+				else System.out.println("Passive mode...");
+			}
 			else if(input.equals("u")) {
 				cm.undoDeaths(mc);
 				mc.undoMove();
@@ -78,8 +77,9 @@ public class PlayGame {
 	
 	private static void printPositions() {
 		for(Position p: cm.getPositions()){
-			System.out.println("Position: " + p.getX() + ", " + p.getY() + ", " + p.getZ());
-			for(Ship sh: p.getShips()) System.out.println(sh.getName());
+			for(Ship ship: p.getShips()){
+				System.out.println(ship.getName() + ": " + p.getX() + "," + p.getY());
+			}
 		}
 	}
 }

@@ -22,10 +22,26 @@ public abstract class Ship implements Observable{
 	
 	// Move the ship
 	public void move(String mv) {
-		if(mv.equals("up")) this.y--;
-		if(mv.equals("down")) this.y++;
-		if(mv.equals("left")) this.x--;
-		if(mv.equals("right")) this.x++;
+		if(mv.equals("U")) this.y--;
+		else if(mv.equals("D")) this.y++;
+		else if(mv.equals("L")) this.x--;
+		else if(mv.equals("R")) this.x++;
+		else if(mv.equals("UR")) {
+			this.x++;
+			this.y--;			
+		}
+		else if(mv.equals("DR")) {
+			this.x++;
+			this.y++;
+		}
+		else if(mv.equals("UL")) {
+			this.x--;
+			this.y--;
+		}
+		else if(mv.equals("DL")) {
+			this.x--;
+			this.y++;
+		}
 		notifyObservers();
 	}
 	

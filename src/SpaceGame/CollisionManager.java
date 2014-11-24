@@ -84,7 +84,7 @@ public class CollisionManager implements Observer{
 				System.out.println("Collision - MotherShip wins!");
 			}
 			else{
-				System.out.println("Collision - MotherShip loses");
+				System.out.println("Collision - MotherShip loses!");
 				m.setAlive(false);
 			}
 		}
