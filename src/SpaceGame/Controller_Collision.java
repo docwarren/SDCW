@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class CollisionManager implements Observer{
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.TransformGroup;
+
+public class Controller_Collision implements Observer{
 	private ArrayList<Position> positions;
 	private Stack<Stack<Ship>> killList;
 	private Stack<Ship> currentKills;
 	private int maxX;
 	private int maxY;
 	
-	static CollisionManager uniqueInstance;
+	static Controller_Collision uniqueInstance;
 	
-	public static synchronized CollisionManager getInstance(int maxX, int maxY) throws CollisionManagerException{
+	public static synchronized Controller_Collision getInstance(int maxX, int maxY) throws Exception_CM{
 		if( uniqueInstance == null){
-			uniqueInstance = new CollisionManager(maxX, maxY);
+			uniqueInstance = new Controller_Collision(maxX, maxY);
 			return uniqueInstance;
 		}
 		else{
@@ -23,7 +26,7 @@ public class CollisionManager implements Observer{
 		}		
 	}
 	
-	private CollisionManager(int maxX, int maxY) {
+	private Controller_Collision(int maxX, int maxY) {
 		this.maxX = maxX;
 		this.maxY = maxY;
 		positions = new ArrayList<Position>();
@@ -69,8 +72,8 @@ public class CollisionManager implements Observer{
 		return px;
 	}
 	
-	public void resolveCollisions(MoveController mc) throws MotherShipException {
-		MotherShip m = MotherShip.getInstance(this);
+	public void resolveCollisions(Controller_Move mc, TransformGroup bigGroup) throws Exception_MS {
+		ShipMother m = (ShipMother) mc.getShipByName("MotherShip");
 		Position p = getPosition(m.getX(), m.getY(), m.getZ());
 		
 		if(p.getShips().size() == 1) return;
@@ -93,11 +96,16 @@ public class CollisionManager implements Observer{
 		for(Ship s: currentKills) {
 			p.removeShip(s);
 			mc.removeShip(s);
+			BranchGroup thisBranch = (BranchGroup) s.getShape().getMesh().getParent().getParent();
+			bigGroup.removeChild(thisBranch);
 		}
 		killList.push(currentKills);
 	}
 	
-	public void undoDeaths(MoveController mc){
+	public void undoDeaths(Controller_Move mc){
+		/*
+		 * Pops the latest round of deaths from the stack and reverses them
+		 */
 		if(killList.isEmpty()) return;
 		Stack<Ship> kills = killList.pop();
 		while(!kills.isEmpty()){

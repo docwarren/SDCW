@@ -3,24 +3,24 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleGame {
-	private static MoveController mc;
-	private static CollisionManager cm;
-	private static MotherShip player;
-	private static ShipFactory shFactory;
-	private static MoveFactory mvFactory;
+	private static Controller_Move mc;
+	private static Controller_Collision cm;
+	private static ShipMother player;
+	private static Factory_Ship shFactory;
+	private static Factory_Move mvFactory;
 	
 	public ConsoleGame(){}
 	
-	public static void main(String[] args) throws MoveControllerException, MotherShipException, CollisionManagerException{
-		mc = MoveController.getInstance(4, 4);
-		cm = CollisionManager.getInstance(4, 4);
+	public static void main(String[] args) throws Exception_MC, Exception_MS, Exception_CM{
+		mc = Controller_Move.getInstance(4, 4);
+		cm = Controller_Collision.getInstance(4, 4);
 		
-		player = MotherShip.getInstance(cm);		// Create the mothership
+		player = ShipMother.getInstance(cm, 0);		// Create the mothership
 		mc.addShip(player);							// Add the mothership to the game
 		player.notifyObservers();					// Update the collision detector about the position of the new ship
 		
-		shFactory = new ShipFactory(cm);	
-		mvFactory = new MoveFactory();
+		shFactory = new Factory_Ship(cm, 0);	
+		mvFactory = new Factory_Move();
 		String[] shipTypes = {"BattleCruizer", "BattleShooter", "BattleStar"};
 		
 		// Print out all the positions and what ships are at that position
@@ -58,7 +58,7 @@ public class ConsoleGame {
 				}
 				
 				mc.executeTurn();
-				cm.resolveCollisions(mc);
+				cm.resolveCollisions(mc, null);
 				printPositions();
 			}
 			else if(input.equals("s")) {

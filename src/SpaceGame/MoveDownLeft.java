@@ -7,13 +7,12 @@ public class MoveDownLeft extends Move {
 	}
 
 	@Override
-	public void move() {
-		this.getShip().move("DL");
-	}
-
-	@Override
 	public void undo() {
 		this.getShip().move("UR");
 	}
-
+	
+	@Override
+	public void run() {
+		this.getShip().move("DL");
+	}
 }

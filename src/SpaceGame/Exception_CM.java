@@ -1,6 +1,6 @@
 package SpaceGame;
 
-public class CollisionManagerException extends Exception {
+public class Exception_CM extends Exception {
 
 	/**
 	 * 

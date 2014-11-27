@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Stack;
 
-public class MoveController{
+public class Controller_Move{
 	private Stack<Stack<Move>> turns;		// Keep track of all turn
 	private Stack<Move> turn;				// Keep track of the current turn
 	private ArrayList<Ship> ships;
@@ -13,9 +13,9 @@ public class MoveController{
 	private int maxY;
 	
 	// Singleton ====================================== Constructor ==================================
-	static MoveController uniqueInstance;
+	static Controller_Move uniqueInstance;
 	
-	private MoveController(int maxX, int maxY){
+	private Controller_Move(int maxX, int maxY){
 		this.maxX = maxX;
 		this.maxY = maxY;
 		this.turns = new Stack<Stack<Move>>();
@@ -23,9 +23,9 @@ public class MoveController{
 		this.turn = new Stack<Move>();
 	}
 	
-	public static synchronized MoveController getInstance(int maxX, int maxY) throws MoveControllerException{
+	public static synchronized Controller_Move getInstance(int maxX, int maxY) throws Exception_MC{
 		if( uniqueInstance == null){
-			uniqueInstance = new MoveController(maxX, maxY);
+			uniqueInstance = new Controller_Move(maxX, maxY);
 			return uniqueInstance;
 		}
 		else{
@@ -79,6 +79,13 @@ public class MoveController{
 			Move mv = turn.pop();
 			mv.undo();
 		}
+	}
+	
+	public Ship getShipByName(String name){
+		for(Ship sh: this.ships){
+			if(sh.getName() == name) return sh;
+		}
+		return null;
 	}
 
 	//================================================List modifiers===================================
