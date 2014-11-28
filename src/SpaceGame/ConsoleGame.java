@@ -3,8 +3,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ConsoleGame {
-	private static Controller_Move mc;
-	private static Controller_Collision cm;
+	private static MoveController mc;
+	private static CollisionController cm;
 	private static ShipMother player;
 	private static Factory_Ship shFactory;
 	private static Factory_Move mvFactory;
@@ -12,8 +12,8 @@ public class ConsoleGame {
 	public ConsoleGame(){}
 	
 	public static void main(String[] args) throws Exception_MC, Exception_MS, Exception_CM{
-		mc = Controller_Move.getInstance(4, 4);
-		cm = Controller_Collision.getInstance(4, 4);
+		mc = MoveController.getInstance(4, 4);
+		cm = CollisionController.getInstance(4, 4);
 		
 		player = ShipMother.getInstance(cm, 0);		// Create the mothership
 		mc.addShip(player);							// Add the mothership to the game

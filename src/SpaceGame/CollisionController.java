@@ -11,18 +11,18 @@ import javax.media.j3d.TransformGroup;
 
 import com.sun.j3d.utils.geometry.Text2D;
 
-public class Controller_Collision implements Observer{
+public class CollisionController implements Observer{
 	private ArrayList<Position> positions;
 	private Stack<Stack<Ship>> killList;
 	private Stack<Ship> currentKills;
 	private int maxX;
 	private int maxY;
 	
-	static Controller_Collision uniqueInstance;
+	static CollisionController uniqueInstance;
 	
-	public static synchronized Controller_Collision getInstance(int maxX, int maxY) throws Exception_CM{
+	public static synchronized CollisionController getInstance(int maxX, int maxY) throws Exception_CM{
 		if( uniqueInstance == null){
-			uniqueInstance = new Controller_Collision(maxX, maxY);
+			uniqueInstance = new CollisionController(maxX, maxY);
 			return uniqueInstance;
 		}
 		else{
@@ -30,7 +30,7 @@ public class Controller_Collision implements Observer{
 		}		
 	}
 	
-	private Controller_Collision(int maxX, int maxY) {
+	private CollisionController(int maxX, int maxY) {
 		this.maxX = maxX;
 		this.maxY = maxY;
 		positions = new ArrayList<Position>();
@@ -76,7 +76,7 @@ public class Controller_Collision implements Observer{
 		return px;
 	}
 	
-	public void resolveCollisions(Controller_Move mc, TransformGroup bigGroup, Text3D banner) throws Exception_MS {
+	public void resolveCollisions(MoveController mc, TransformGroup bigGroup, Text3D banner) throws Exception_MS {
 		// Reposition the ships so that they don't overlap
 		for(Position pos: positions){
 			for(int i = 0; i < pos.getShips().size(); i++){
@@ -119,7 +119,7 @@ public class Controller_Collision implements Observer{
 		killList.push(currentKills);
 	}
 	
-	public void undoDeaths(Controller_Move mc){
+	public void undoDeaths(MoveController mc){
 		/*
 		 * Pops the latest round of deaths from the stack and reverses them
 		 */

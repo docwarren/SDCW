@@ -14,7 +14,7 @@ import javax.vecmath.Vector3d;
 
 public abstract class Ship implements Observable{
 	private Boolean alive;
-	private Controller_Collision cm;
+	private CollisionController cm;
 	private String name;
 	private int x;
 	private int y;
@@ -24,7 +24,7 @@ public abstract class Ship implements Observable{
 	private static float SIZE_SCALE = 0.75f;
 	BranchGroup brGroup;
 
-	public Ship(Controller_Collision cm, Position pos, float s){
+	public Ship(CollisionController cm, Position pos, float s){
 		this.cm = cm;
 		this.setX(pos.getX());
 		this.setY(pos.getY());
@@ -66,7 +66,6 @@ public abstract class Ship implements Observable{
 			this.y++;
 		}
 		notifyObservers();
-		updateShape();
 	}
 	
 	public BranchGroup shipBranchGroup() {
@@ -110,7 +109,7 @@ public abstract class Ship implements Observable{
 		return brGroup;
 	}
 	
-	private void updateShape() {
+	public void updateShape() {
 		/*
 		 * This updates the graph scene node with new Translation for this entity
 		 */
@@ -152,11 +151,11 @@ public abstract class Ship implements Observable{
 		this.alive = alive;
 	}
 
-	public Controller_Collision getCm() {
+	public CollisionController getCm() {
 		return this.cm;
 	}
 
-	public void setMc(Controller_Collision cm) {
+	public void setMc(CollisionController cm) {
 		this.cm = cm;
 	}
 

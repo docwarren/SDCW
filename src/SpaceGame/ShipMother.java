@@ -8,7 +8,7 @@ public class ShipMother extends Ship {
 	// Singleton constructor
 	static ShipMother uniqueInstance;
 	
-	private ShipMother(Controller_Collision cm, Position pos, float s) {
+	private ShipMother(CollisionController cm, Position pos, float s) {
 		super(cm, pos, s);
 		this.attackMode = true;
 		this.setName("MotherShip");
@@ -16,7 +16,7 @@ public class ShipMother extends Ship {
 		this.setShape(new ShipShape_Player());
 	}
 	
-	public static synchronized ShipMother getInstance(Controller_Collision cm, float s) throws Exception_MS{
+	public static synchronized ShipMother getInstance(CollisionController cm, float s) throws Exception_MS{
 		if( uniqueInstance == null){
 			uniqueInstance = new ShipMother(cm, cm.getRandomPosition(), s);
 			return uniqueInstance;

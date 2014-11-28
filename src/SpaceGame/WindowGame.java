@@ -42,8 +42,8 @@ public class WindowGame extends Applet implements ActionListener{
 	private Text3D banner;
 	
 	// Backend game machine variables
-	private Controller_Collision cm;
-	private Controller_Move mc;
+	private CollisionController cc;
+	private MoveController mc;
 	private static ShipMother player;
 	private Factory_Ship shFactory;
 	private Factory_Move mvFactory;
@@ -98,13 +98,13 @@ public class WindowGame extends Applet implements ActionListener{
 		 * Sets up the Collision Manager, MotherShip and MoveController Singletons
 		 * Creates a Ship Factory and a Move Factory
 		 */
-		cm = Controller_Collision.getInstance(MAXX, MAXY);
-		mc = Controller_Move.getInstance(MAXX, MAXY);
-		player = ShipMother.getInstance(cm, TF_SCALE);		// Create the mothership
+		cc = CollisionController.getInstance(MAXX, MAXY);
+		mc = MoveController.getInstance(MAXX, MAXY);
+		player = ShipMother.getInstance(cc, TF_SCALE);		// Create the mothership
 		mc.addShip(player); 								// Add the mothership to the game
 		player.notifyObservers();							// Update the collision detector about the position of the new ship
 		
-		shFactory = new Factory_Ship(cm, TF_SCALE);
+		shFactory = new Factory_Ship(cc, TF_SCALE);
 		mvFactory = new Factory_Move();
 	}
 
@@ -249,7 +249,7 @@ public class WindowGame extends Applet implements ActionListener{
 	}
 
 	private void undoMoves(){
-		cm.undoDeaths(mc);
+		cc.undoDeaths(mc);
 		mc.undoMove();
 		//renderScene();
 	}
@@ -261,7 +261,7 @@ public class WindowGame extends Applet implements ActionListener{
 		mc.getCurrentTurn().add(pmv);
 		
 		// Loop through all the positions
-		for(Position p: cm.getPositions()){
+		for(Position p: cc.getPositions()){
 			// For each ship create a new move
 			for(Ship sh: p.getShips()){
 				if(sh.getName() == "MotherShip") continue;
@@ -272,7 +272,8 @@ public class WindowGame extends Applet implements ActionListener{
 		}
 		
 		mc.executeTurn();
-		cm.resolveCollisions(mc, bigGroup, banner);
+		cc.resolveCollisions(mc, bigGroup, banner);
+		mc.renderShips();
 		
 		// Randomly create a new ship;
 		Random r = new Random();

@@ -1,10 +1,10 @@
 package SpaceGame;
 
 public class Factory_Ship {
-	private Controller_Collision cm;
+	private CollisionController cm;
 	private float scale;
 	
-	public Factory_Ship(Controller_Collision cm, float s) {
+	public Factory_Ship(CollisionController cm, float s) {
 		this.cm = cm;
 		this.scale = s;
 	}
