@@ -25,11 +25,10 @@ public abstract class Ship implements Observable{
 	BranchGroup brGroup;
 
 	public Ship(Controller_Collision cm, Position pos, float s){
-		
 		this.cm = cm;
 		this.setX(pos.getX());
 		this.setY(pos.getY());
-		this.setZ(pos.getZ());
+		this.setZ(0);
 		Ship.TF_SCALE = s;
 	}	
 	
@@ -137,7 +136,7 @@ public abstract class Ship implements Observable{
 		// then translate
 		float sx = (float)this.getX() * TF_SCALE - (TF_SCALE * 1.5f);
 		float sz = (float)this.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		float sy = (float)this.getZ() * 0.1f;
+		float sy = (float)this.getZ() * 1.0f;
 		Vector3d vt = new Vector3d(sx, sy, sz);
 		translate.setTranslation(vt);
 		translate.setScale(SIZE_SCALE);

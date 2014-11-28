@@ -10,7 +10,7 @@ public class Factory_Ship {
 	}
 	
 	public Ship createShip(String shipType) throws Exception_MC{
-		Position p = cm.getPosition(0,0,0);
+		Position p = cm.getPosition(0,0);
 		if(shipType.equals("BattleCruizer")) return new ShipBattleCruizer(cm, p, scale);
 		else if(shipType.equals("BattleStar")) return new ShipBattleStar(cm, p, scale);
 		else return new ShipBattleCruizer(cm, p, scale);

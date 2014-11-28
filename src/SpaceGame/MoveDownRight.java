@@ -14,7 +14,7 @@ public class MoveDownRight extends Move {
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(500);
+			Thread.sleep(350);
 			this.getShip().move("DR");
 		} 
 		catch (InterruptedException e) {

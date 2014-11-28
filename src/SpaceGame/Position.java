@@ -5,13 +5,11 @@ import java.util.ArrayList;
 public class Position {
 	private int x;
 	private int y;
-	private int z;
 	private ArrayList<Ship> ships;
 	
-	public Position(int x, int y, int z){
+	public Position(int x, int y){
 		this.setX(x);
 		this.setY(y);
-		this.setZ(z);
 		this.ships = new ArrayList<Ship>();
 	}
 	
@@ -24,7 +22,7 @@ public class Position {
 	}
 	
 	public String toString(){
-		return this.x + ": " + this.y + ": " + this.z;
+		return this.x + ": " + this.y;
 	}
 	//========================================Getters and setters======================
 	
@@ -47,11 +45,5 @@ public class Position {
 	}
 	public void setY(int y) {
 		this.y = y;
-	}
-	public int getZ() {
-		return z;
-	}
-	public void setZ(int z) {
-		this.z = z;
 	}
 }

@@ -39,7 +39,7 @@ public class Controller_Collision implements Observer{
 		
 		for(int i = 0; i < maxX; i++){
 			for(int j = 0; j < maxY; j++){
-				Position p = new Position(i, j, 0);
+				Position p = new Position(i, j);
 				this.positions.add(p);
 			}
 		}
@@ -49,7 +49,7 @@ public class Controller_Collision implements Observer{
 	public Position getRandomPosition() {
 		Random rx = new Random();
 		Random ry = new Random();
-		Position p = this.getPosition(rx.nextInt(this.maxX -1) + 1, ry.nextInt(this.maxY - 1) + 1, 0);
+		Position p = this.getPosition(rx.nextInt(this.maxX -1) + 1, ry.nextInt(this.maxY - 1) + 1);
 		return p;
 	}
 	
@@ -60,27 +60,34 @@ public class Controller_Collision implements Observer{
 		for(Position p: this.positions){
 			if(p.getShips().contains(sh)) p.getShips().remove(sh);
 		}
-		Position p = this.getPosition(sh.getX(), sh.getY(), sh.getZ());
+		Position p = this.getPosition(sh.getX(), sh.getY());
 		p.addShip(sh);
 	}
 
 	// return a position if it exists otherwise create a new one
-	public Position getPosition(int x, int y, int z){
+	public Position getPosition(int x, int y){
 		for(Position p: this.positions){
-			if(p.getX() == x && p.getY() == y && p.getZ() == z){
+			if(p.getX() == x && p.getY() == y ){		// Taken z out
 				return p;
 			}
 		}
-		Position px = new Position(x, y, z);
+		Position px = new Position(x, y);
 		this.positions.add(px);
 		return px;
 	}
 	
 	public void resolveCollisions(Controller_Move mc, TransformGroup bigGroup, Text3D banner) throws Exception_MS {
+		// Reposition the ships so that they don't overlap
+		for(Position pos: positions){
+			for(int i = 0; i < pos.getShips().size(); i++){
+				pos.getShips().get(i).setZ(i);
+			}
+		}
+		
 		// Get the MotherShip object
 		ShipMother m = (ShipMother) mc.getShipByName("MotherShip");
 		// Get the position of the MotherShip
-		Position p = getPosition(m.getX(), m.getY(), m.getZ());
+		Position p = getPosition(m.getX(), m.getY());
 		
 		// Check for other ships on the same square
 		if(p.getShips().size() == 1) {
@@ -110,13 +117,6 @@ public class Controller_Collision implements Observer{
 			bigGroup.removeChild(thisBranch);
 		}
 		killList.push(currentKills);
-		
-		// Reposition the ships so that they don't overlap
-		for(Position pos: positions){
-			for(int i = 0; i < pos.getShips().size(); i++){
-				pos.getShips().get(i).setZ(i);
-			}
-		}
 	}
 	
 	public void undoDeaths(Controller_Move mc){
@@ -127,7 +127,7 @@ public class Controller_Collision implements Observer{
 		Stack<Ship> kills = killList.pop();
 		while(!kills.isEmpty()){
 			Ship sh = kills.pop();
-			Position p = getPosition(sh.getX(), sh.getY(), sh.getZ());
+			Position p = getPosition(sh.getX(), sh.getY());
 			mc.addShip(sh);
 			p.addShip(sh);
 		}

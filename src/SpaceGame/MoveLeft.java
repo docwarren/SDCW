@@ -15,7 +15,7 @@ public class MoveLeft extends Move {
 	public void run() {
 		
 		try {
-			Thread.sleep(500);
+			Thread.sleep(350);
 			this.getShip().move("L");
 		} 
 		catch (InterruptedException e) {

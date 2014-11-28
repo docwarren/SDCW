@@ -32,10 +32,12 @@ public class WindowGame extends Applet implements ActionListener{
 	private JButton move = new JButton("Move");
 	private JButton switchMode = new JButton("Switch Mode");
 	private JButton quit = new JButton("Quit");
-	private Canvas3D canvas;
+	
 	
 	// For 3D rendering
-	private SimpleUniverse world;
+	private Canvas3D canvas;
+	private VirtualUniverse world;
+	private View view;
 	private TransformGroup bigGroup;
 	private Text3D banner;
 	
@@ -86,35 +88,9 @@ public class WindowGame extends Applet implements ActionListener{
 		add("South", panel);
 		
 		// Render the Ships
-		createScene();
-	}
-
-	private Transform3D translateView() {
-		/*
-		 * Creates a new Transform Group that moves the scene viewer back and up so that it can see all the ships
-		 */
-		Transform3D viewTranslate = new Transform3D();
-		Transform3D viewRotate = new Transform3D();
-		
-		// Define where we want the view to view from
-		float zPos = 20.0f;
-		float yPos = 10.0f;
-		float xPos = 0.0f;
-		
-		// Rotate first
-		// Calculate the angle we need to rotate the view by so that it looks directly at 0,0,0
-		double toRotate = Math.toRadians(90) - Math.atan(zPos/yPos);
-		
-		// Implement the rotation
-		viewTranslate.rotX(-toRotate);
-		viewRotate.rotY(0);
-		viewTranslate.mul(viewRotate);
-		
-		// Then translate
-		Vector3d trView = new Vector3d(xPos, yPos, zPos);
-		viewTranslate.setTranslation(trView);
-		
-		return viewTranslate;
+		BranchGroup scene = createScene();
+		UniverseBuilder universe = new UniverseBuilder(canvas);
+		universe.addBranchGraph(scene);
 	}
 	
 	private void backendConfigure() throws Exception_CM, Exception_MC, Exception_MS {
@@ -132,15 +108,12 @@ public class WindowGame extends Applet implements ActionListener{
 		mvFactory = new Factory_Move();
 	}
 
-	public void createScene(){
-		/*
-		 * Creates a Java3D Graph Scene that renders ships and has a light source to illuminate them
-		 */
-		BranchGroup group = new BranchGroup();
-
+	public BranchGroup createScene(){
+		BranchGroup rootNode = new BranchGroup();
+		
 		// Add the banner
 		TransformGroup textGroup = getBanner();
-		group.addChild(textGroup);
+		rootNode.addChild(textGroup);
 		
 		// Create a transform group so we can move stuff around
 		bigGroup = new TransformGroup();
@@ -156,21 +129,13 @@ public class WindowGame extends Applet implements ActionListener{
 		bigGroup.addChild(lightGroup);
 		bigGroup.addChild(shipGroup);
 		bigGroup.addChild(board);
-		group.addChild(bigGroup);
+		rootNode.addChild(bigGroup);
 		
 		// Add a background image
 		Background bg = getSky();
-		group.addChild(bg);
-				
-		world = new SimpleUniverse(canvas);
-		ViewingPlatform view = world.getViewingPlatform();
+		rootNode.addChild(bg);
 		
-		// Set the ViewingPlatform transform so that it is further away, and higher up;
-		Transform3D viewTranslate = translateView();
-		view.getViewPlatformTransform().setTransform(viewTranslate);
-		
-		// Render the scene
-		world.addBranchGraph(group);
+		return rootNode;
 	}
 
 	private TransformGroup getBanner() {
@@ -306,6 +271,9 @@ public class WindowGame extends Applet implements ActionListener{
 			}
 		}
 		
+		mc.executeTurn();
+		cm.resolveCollisions(mc, bigGroup, banner);
+		
 		// Randomly create a new ship;
 		Random r = new Random();
 		int x = r.nextInt(3);
@@ -317,8 +285,6 @@ public class WindowGame extends Applet implements ActionListener{
 			bigGroup.addChild(newShip.shipBranchGroup());
 			newShip.notifyObservers();	// Notify the collision manager about the new ship
 		}
-		mc.executeTurn();
-		cm.resolveCollisions(mc, bigGroup, banner);
 	}	
 	
 	@Override

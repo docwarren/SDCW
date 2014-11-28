@@ -15,7 +15,7 @@ public class MoveRight extends Move {
 	public void run() {
 		
 		try {
-			Thread.sleep(500);
+			Thread.sleep(350);
 			this.getShip().move("R");
 		} 
 		catch (InterruptedException e) {
