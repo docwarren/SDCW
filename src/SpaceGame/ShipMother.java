@@ -13,7 +13,7 @@ public class ShipMother extends Ship {
 		this.attackMode = true;
 		this.setName("MotherShip");
 		this.setAlive(true);
-		this.setShape(new ShipShape_Aggressive());
+		this.setShape(new ShipShape_Player());
 	}
 	
 	public static synchronized ShipMother getInstance(Controller_Collision cm, float s) throws Exception_MS{
@@ -30,7 +30,7 @@ public class ShipMother extends Ship {
 		// Change the mode
 		this.attackMode = !this.attackMode;
 		// Change the mesh we use according to the mode
-		if(isAttacking()) this.setShape(new ShipShape_Aggressive());
+		if(isAttacking()) this.setShape(new ShipShape_Player());
 		else this.setShape(new ShipShape_Passive());
 	}
 	
