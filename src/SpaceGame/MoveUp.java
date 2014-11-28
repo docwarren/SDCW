@@ -12,6 +12,14 @@ public class MoveUp extends Move {
 	
 	@Override
 	public void run() {
-		this.getShip().move("U");
+		
+		try {
+			Thread.sleep(500);
+			this.getShip().move("U");
+		} 
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

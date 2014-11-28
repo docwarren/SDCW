@@ -10,7 +10,7 @@ public abstract class Move extends Thread{
 	}
 	
 	public void move(){
-		this.run();
+		this.start();
 	}
 
 	public Ship getShip() {

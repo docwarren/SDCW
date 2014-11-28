@@ -21,6 +21,7 @@ public abstract class Ship implements Observable{
 	private int z;
 	private ShipShape shape;
 	private static float TF_SCALE;
+	private static float SIZE_SCALE = 0.75f;
 	BranchGroup brGroup;
 
 	public Ship(Controller_Collision cm, Position pos, float s){
@@ -72,6 +73,7 @@ public abstract class Ship implements Observable{
 	public BranchGroup shipBranchGroup() {
 		/*
 		 * Creates a Branch Group for rendering a ship in the correct position
+		 * Animation help from here: http://www.computing.northampton.ac.uk/~gary/csy3019/CSY3019SectionD.html
 		 */
 		brGroup = new BranchGroup();
 		brGroup.setCapability(BranchGroup.ALLOW_DETACH);// so that we can remove it from the scene later
@@ -84,10 +86,15 @@ public abstract class Ship implements Observable{
 		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_READ);		// So we can get the mesh
 		
 		// Make an animator for the translation
+		Alpha alf = new Alpha(1, 3000);
+		PositionInterpolator PI = new PositionInterpolator(alf, trGroup);
+		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0f, 0.0f,0.0f), 100.0f);
+		PI.setBounds(bounds);
 		
+		// Add the trandformGroup to the branch
+		brGroup.addChild(trGroup);
 		
-		
-		// Get the transform for the ship
+		// Get and reset the transform for the ship
 		Transform3D translate = this.moveShape();
 		trGroup.setTransform(translate);
 		
@@ -98,8 +105,9 @@ public abstract class Ship implements Observable{
 		// Add the mesh to the transform group
 		trGroup.addChild(shipMesh);
 		
-		// Add the transform to the branch
-		brGroup.addChild(trGroup);
+		// Add the translation to the trGroup
+		trGroup.addChild(PI);
+		
 		return brGroup;
 	}
 	
@@ -129,20 +137,13 @@ public abstract class Ship implements Observable{
 		// then translate
 		float sx = (float)this.getX() * TF_SCALE - (TF_SCALE * 1.5f);
 		float sz = (float)this.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		Vector3d vt = new Vector3d(sx, 0.0f, sz);
+		float sy = (float)this.getZ() * 0.1f;
+		Vector3d vt = new Vector3d(sx, sy, sz);
 		translate.setTranslation(vt);
-		
+		translate.setScale(SIZE_SCALE);
 		return translate;
 	}
 	
-	public Transform3D translation(){
-		Transform3D translate = new Transform3D();
-		float sx = (float)this.getX() * TF_SCALE - (TF_SCALE * 1.5f);
-		float sz = (float)this.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		Vector3d vt = new Vector3d(sx, 0.0f, sz);
-		translate.setTranslation(vt);
-		return translate;
-	}
 	
 	//============================================Getters and Setters=============================
 	public Boolean isAlive() {

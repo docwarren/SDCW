@@ -15,6 +15,7 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.applet.MainFrame;
+import com.sun.j3d.utils.geometry.Text2D;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import com.sun.j3d.utils.universe.ViewingPlatform;
@@ -36,6 +37,7 @@ public class WindowGame extends Applet implements ActionListener{
 	// For 3D rendering
 	private SimpleUniverse world;
 	private TransformGroup bigGroup;
+	private Text3D banner;
 	
 	// Backend game machine variables
 	private Controller_Collision cm;
@@ -95,8 +97,9 @@ public class WindowGame extends Applet implements ActionListener{
 		Transform3D viewRotate = new Transform3D();
 		
 		// Define where we want the view to view from
-		float yPos = 10.0f;
 		float zPos = 20.0f;
+		float yPos = 10.0f;
+		float xPos = 0.0f;
 		
 		// Rotate first
 		// Calculate the angle we need to rotate the view by so that it looks directly at 0,0,0
@@ -108,7 +111,7 @@ public class WindowGame extends Applet implements ActionListener{
 		viewTranslate.mul(viewRotate);
 		
 		// Then translate
-		Vector3d trView = new Vector3d(0.0f, yPos, zPos);
+		Vector3d trView = new Vector3d(xPos, yPos, zPos);
 		viewTranslate.setTranslation(trView);
 		
 		return viewTranslate;
@@ -134,6 +137,10 @@ public class WindowGame extends Applet implements ActionListener{
 		 * Creates a Java3D Graph Scene that renders ships and has a light source to illuminate them
 		 */
 		BranchGroup group = new BranchGroup();
+
+		// Add the banner
+		TransformGroup textGroup = getBanner();
+		group.addChild(textGroup);
 		
 		// Create a transform group so we can move stuff around
 		bigGroup = new TransformGroup();
@@ -154,7 +161,7 @@ public class WindowGame extends Applet implements ActionListener{
 		// Add a background image
 		Background bg = getSky();
 		group.addChild(bg);
-		
+				
 		world = new SimpleUniverse(canvas);
 		ViewingPlatform view = world.getViewingPlatform();
 		
@@ -164,6 +171,40 @@ public class WindowGame extends Applet implements ActionListener{
 		
 		// Render the scene
 		world.addBranchGraph(group);
+	}
+
+	private TransformGroup getBanner() {
+		/*
+		 * Get a banner for showing scores etc.
+		 */
+		// Font and text
+		Font3D font = new Font3D(new Font("SanSerif", Font.BOLD, 12), new FontExtrusion());
+		banner = new Text3D(font, "Space Wars!");
+		// Allow it to be modified after compiling
+		banner.setCapability(Text3D.ALLOW_STRING_WRITE);
+		// Get a decent texture
+		Appearance ap = bannerAppearance();
+		Shape3D bannerShape = new Shape3D(banner, ap);
+		TransformGroup textGroup = new TransformGroup();
+		Transform3D textTf = new Transform3D();
+		textTf.setTranslation(new Vector3d(-5.0f, 0.0f, -10.0f));
+		textTf.setScale(0.1);
+		textGroup.setTransform(textTf);
+		textGroup.addChild(bannerShape);
+		return textGroup;
+	}
+	
+	private Appearance bannerAppearance(){
+		Appearance a = new Appearance();
+		// Set a material manually
+		Color3f ambient = new Color3f(1.0f, 0.9f, 0.9f);
+		Color3f diffuse = new Color3f(1.0f, 0.9f, 0.9f);
+		Color3f specular = new Color3f(1.0f, 1.0f, 1.0f);
+		Color3f emissive = new Color3f(0.0f, 0.0f, 0.0f);
+		float shiny = 40.0f;
+		Material material = new Material(ambient, emissive, diffuse, specular, shiny);
+		a.setMaterial(material);
+		return a;
 	}
 
 	private Background getSky() {
@@ -249,10 +290,16 @@ public class WindowGame extends Applet implements ActionListener{
 	}
 	
 	private void moveShips() throws Exception_MC, Exception_MS{
+		// Move the MotherShip first
+		String playerMoveType = mc.randomMove(player);
+		Move pmv = mvFactory.createMove(player, playerMoveType);
+		mc.getCurrentTurn().add(pmv);
+		
 		// Loop through all the positions
 		for(Position p: cm.getPositions()){
 			// For each ship create a new move
 			for(Ship sh: p.getShips()){
+				if(sh.getName() == "MotherShip") continue;
 				String moveType = mc.randomMove(sh);			// Randomly generate a move type
 				Move mv = mvFactory.createMove(sh, moveType);	// Create the appropriate move accordingly
 				mc.getCurrentTurn().add(mv);					// Add the moves to the list of moves to be executed this turn
@@ -271,12 +318,12 @@ public class WindowGame extends Applet implements ActionListener{
 			newShip.notifyObservers();	// Notify the collision manager about the new ship
 		}
 		mc.executeTurn();
-		cm.resolveCollisions(mc, bigGroup);
+		cm.resolveCollisions(mc, bigGroup, banner);
 	}	
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		if(!player.isAlive()) System.out.println("Game Over");
+		if(!player.isAlive()) banner.setString("GAME OVER!");
 		else if(e.getSource() == move){
 			try {
 				moveShips();
@@ -291,6 +338,9 @@ public class WindowGame extends Applet implements ActionListener{
 			System.exit(0);
 		}
 		else if(e.getSource() == switchMode){
+			// Change the banner
+			if(player.isAttacking()) banner.setString("Passive mode");
+			else banner.setString("Aggressive mode");
 			// We have to remove the player branchgroup from the bigGroup
 			bigGroup.removeChild(player.getShape().getMesh().getParent().getParent());
 			// Switch to the other mesh properties

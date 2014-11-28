@@ -5,7 +5,11 @@ import java.util.Random;
 import java.util.Stack;
 
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Text3D;
 import javax.media.j3d.TransformGroup;
+
+import com.sun.j3d.utils.geometry.Text2D;
 
 public class Controller_Collision implements Observer{
 	private ArrayList<Position> positions;
@@ -72,22 +76,28 @@ public class Controller_Collision implements Observer{
 		return px;
 	}
 	
-	public void resolveCollisions(Controller_Move mc, TransformGroup bigGroup) throws Exception_MS {
+	public void resolveCollisions(Controller_Move mc, TransformGroup bigGroup, Text3D banner) throws Exception_MS {
+		// Get the MotherShip object
 		ShipMother m = (ShipMother) mc.getShipByName("MotherShip");
+		// Get the position of the MotherShip
 		Position p = getPosition(m.getX(), m.getY(), m.getZ());
 		
-		if(p.getShips().size() == 1) return;
+		// Check for other ships on the same square
+		if(p.getShips().size() == 1) {
+			banner.setString("Space Wars!");
+			return;
+		}
 		else if(p.getShips().size() == 2){
-			System.out.println("Collision - MotherShip wins!");
+			banner.setString("Enemy Killed!");
 			for(Ship s: p.getShips()) if(!s.getName().equals("MotherShip")) currentKills.push(s);
 		}
 		else if(p.getShips().size() == 3){
 			if(m.isAttacking()){
 				for(Ship s: p.getShips()) if(!s.getName().equals("MotherShip")) currentKills.add(s);
-				System.out.println("Collision - MotherShip wins!");
+				banner.setString("Enemy Killed!");
 			}
 			else{
-				System.out.println("Collision - MotherShip loses!");
+				banner.setString("GAME OVER!");
 				m.setAlive(false);
 			}
 		}
@@ -100,6 +110,13 @@ public class Controller_Collision implements Observer{
 			bigGroup.removeChild(thisBranch);
 		}
 		killList.push(currentKills);
+		
+		// Reposition the ships so that they don't overlap
+		for(Position pos: positions){
+			for(int i = 0; i < pos.getShips().size(); i++){
+				pos.getShips().get(i).setZ(i);
+			}
+		}
 	}
 	
 	public void undoDeaths(Controller_Move mc){

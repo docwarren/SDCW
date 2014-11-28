@@ -13,6 +13,14 @@ public class MoveDownLeft extends Move {
 	
 	@Override
 	public void run() {
-		this.getShip().move("DL");
+		
+		try {
+			Thread.sleep(500);
+			this.getShip().move("DL");
+		} 
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

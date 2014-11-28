@@ -58,7 +58,7 @@ public class ConsoleGame {
 				}
 				
 				mc.executeTurn();
-				cm.resolveCollisions(mc, null);
+				//cm.resolveCollisions(mc, null);
 				printPositions();
 			}
 			else if(input.equals("s")) {

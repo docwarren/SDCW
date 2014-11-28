@@ -13,6 +13,13 @@ public class MoveUpRight extends Move {
 	
 	@Override
 	public void run() {
-		this.getShip().move("UR");
+		try {
+			Thread.sleep(500);
+			this.getShip().move("UR");
+		} 
+		catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
