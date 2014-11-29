@@ -78,8 +78,8 @@ public abstract class Ship implements Observable{
 			this.x--;
 			this.y++;
 		}
-		updateShape();
 		notifyObservers();
+		updateShape();
 	}
 	
 	public BranchGroup shipBranchGroup() {
@@ -157,6 +157,11 @@ public abstract class Ship implements Observable{
 		return translate;
 	}
 	
+	public int die() {
+		this.setAlive(false);
+		this.notifyObservers();
+		return 1;
+	}
 	
 	//============================================Getters and Setters=============================
 	public Boolean isAlive() {

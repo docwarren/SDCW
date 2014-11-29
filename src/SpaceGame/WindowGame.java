@@ -44,7 +44,7 @@ public class WindowGame extends Applet implements ActionListener{
 	public static void main(String[] args) throws Exception_MS, Exception_CM, Exception_MC{
 		WindowGame game = new WindowGame();
 		//MainFrame frame = 
-		new MainFrame(game, 1200, 680);
+		new MainFrame(game, 800, 600);
 	}	
 	
 	public WindowGame() throws Exception_MS, Exception_CM, Exception_MC {
@@ -223,7 +223,6 @@ public class WindowGame extends Applet implements ActionListener{
 
 	private void undoMoves(){
 		mc.undoMove();
-		//mc.renderShips();
 	}
 	
 	private void moveShips() throws Exception_MC, Exception_MS{
@@ -231,7 +230,6 @@ public class WindowGame extends Applet implements ActionListener{
 		Turn turn = mc.makeNewTurn();
 		// Execute the moves
 		mc.executeTurn(turn);
-//		mc.resolveCollisions(banner);
 	}
 	
 	@Override
@@ -244,7 +242,6 @@ public class WindowGame extends Applet implements ActionListener{
 			return;
 		}
 		else if(e.getSource() == move){
-			// System.out.println("MOVE");
 			try {
 				moveShips();
 			} catch (Exception_MC | Exception_MS e1) {
@@ -252,7 +249,7 @@ public class WindowGame extends Applet implements ActionListener{
 			}
 		}
 		else if(e.getSource() == undo){
-			// System.out.println("UNDO");
+			System.out.println("UNDO");
 			undoMoves();
 		}
 		else if(e.getSource() == quit){

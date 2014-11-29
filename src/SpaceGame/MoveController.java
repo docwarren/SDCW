@@ -102,6 +102,7 @@ public class MoveController{
 			}
 			// Notifies all the positions where this ship is and the Universe about the ship position and alive state
 			newShip.notifyObservers();
+			// Ensure that we record the new ship in the turn object
 			turn.newShip(newShip);
 		}
 		
@@ -115,9 +116,58 @@ public class MoveController{
 		for(Move mv: turn.getMoves()){
 			mv.move();
 		}
+		try {
+			resolveFights(turn);
+		} catch (Exception_MC | Exception_MS e) {
+			e.printStackTrace();
+		}
+		
+		
 		pushTurn(turn);
+		
+		// Modify the z position based on the number of ships on each position.
+		for(Position p: this.positions){
+			System.out.print(p.getX() + "," + p.getY() + ": ");
+			for(int i = 0; i < p.getShips().size(); i++){
+				System.out.print(p.getShips().get(i).getName() + "; ");
+				p.getShips().get(i).setZ(i);
+				p.getShips().get(i).updateShape();
+			}
+			System.out.print("\n");
+		}
+		System.out.println("-----------------------------------------------------------------------------------");
 	}
 	
+	private void resolveFights(Turn turn) throws Exception_MC, Exception_MS{
+		// TODO Auto-generated method stub
+		MotherShip player;
+		player = (MotherShip) shFactory.createShip("MotherShip");
+		Position p = getPosition(player.getX(), player.getY());
+		int size = p.getShips().size();
+		int result;
+		if(size == 1) return;
+		else if(size == 2){
+			System.out.println("Mothership wins");
+			for(Ship sh: p.getShips()){
+				if(sh != player) result = sh.die();
+				// Ensure that we record the death in the turn object
+				turn.addKilledShip(sh);
+			}
+		}
+		else if(size == 3 && player.isAttacking()){
+			System.out.println("twice as nice");
+			for(Ship sh: p.getShips()){
+				if(sh != player) result = sh.die();
+				// Ensure that we record the death in the turn object
+				turn.addKilledShip(sh);
+			}
+		}
+		else{
+			result = player.die();
+			System.out.println("GAME OVER");
+		}
+	}
+
 	public void undoMove() {
 		/*
 		 * Undo the last turn
@@ -135,6 +185,7 @@ public class MoveController{
 			}
 			// Recreate any ships killed by the turn
 			for(Ship sh: turn.getKilledShips()){
+				System.out.println("Ship killed here");
 				sh.setAlive(true);
 				sh.notifyObservers();
 			}
@@ -159,48 +210,14 @@ public class MoveController{
 	}
 
 	//================================================Collision Management====================================
-//	public void resolveCollisions(Text3D banner) throws Exception_MS {
-//		// Check all the positions for the mothership.
-//		// If she is on that square then either kill the enemies or the mothership
-//		for(Position p: this.positions){
-//			// Check for other ships on the same square
-//			if(p.getShips().size() < 2) {
-//				banner.setString(player.getX() + "," + player.getY());
-//				return;
-//			}		
-//			else if(p.getShips().size() == 2 && p.hasPlayer()){
-//				banner.setString("Enemy Killed!");
-//				for(Ship s: p.getShips()) if(!s.getName().equals("MotherShip")){
-//					turn.addKilledShip(s);
-//					s.setAlive(false);
-//					s.notifyObservers();
-//				}
-//			}
-//			else if(p.getShips().size() == 3 && p.hasPlayer()){
-//				if(player.isAttacking()){
-//					banner.setString("2 Enemies Killed!");
-//					for(Ship s: p.getShips()) if(!s.getName().equals("MotherShip")){
-//						turn.addKilledShip(s);
-//						s.setAlive(false);
-//						s.notifyObservers();
-//					}
-//				}
-//				else{
-//					banner.setString("GAME OVER!");
-//					player.setAlive(false);
-//					player.notifyObservers();
-//				}
-//			}
-//			else player.setAlive(false);
-//		}
-//		
-//		// Reposition the ships so that they don't overlap
-//		for(Position pos: positions){
-//			for(int i = 0; i < pos.getShips().size(); i++){
-//				pos.getShips().get(i).setZ(i);
-//			}
-//		}
-//	}
+	public Position getPosition(int x, int y){
+		for(Position pos: this.positions){
+			if(pos.getX() == x && pos.getY() == y){
+				return pos;
+			}
+		}
+		return null;
+	}
 	
 	//================================================List modifiers===================================
 	// Push a turn onto the stack

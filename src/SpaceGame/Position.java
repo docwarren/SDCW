@@ -18,15 +18,23 @@ public class Position implements Observer{
 	
 	@Override
 	public void update(Ship ship) {
-		ships.remove(ship);
-		player = false;
-		if(ship.getX() == x && ship.getY() == y && ship.isAlive()){
+		if(ships.contains(ship)){
+			ships.remove(ship);
+			if(ship.getName().equals("MotherShip")) player = false;
+		}
+		else if(ship.getX() == x && ship.getY() == y && ship.isAlive()){
 			ships.add(ship);
-			if(ship.getName().equals("MotherShip")) player = true;
+			if(ship.getName().equals("MotherShip")){
+				player = true;
+			}
 		}
 	}
-	
+
 	//========================================List Modifiers
+	public void fight(){
+		System.out.println(ships.toString());
+	}
+	
 	public void addShip(Ship sh){
 		this.ships.add(sh);
 	}
