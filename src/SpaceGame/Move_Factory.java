@@ -1,8 +1,8 @@
 package SpaceGame;
 
-public class Factory_Move {
+public class Move_Factory {
 	
-	public Factory_Move() {
+	public Move_Factory() {
 	}
 
 	public Move createMove(Ship sh, String type){

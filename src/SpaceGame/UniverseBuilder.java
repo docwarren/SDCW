@@ -1,5 +1,7 @@
 package SpaceGame;
 
+import java.util.ArrayList;
+
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Locale;
@@ -12,15 +14,30 @@ import javax.media.j3d.ViewPlatform;
 import javax.media.j3d.VirtualUniverse;
 import javax.vecmath.Vector3d;
 
-public class UniverseBuilder extends Object {
-	VirtualUniverse world;
-	Locale loc;
-	TransformGroup vpTrans;
-	View view;
-	Canvas3D canvas;
+public class UniverseBuilder extends Object implements Observer{
+	private VirtualUniverse world;		// World for everything
+	private Locale loc;					// Locale of the scene - i.e. the virtual objects
+	private TransformGroup vpTrans;		// transform for the viewer
+	private View view;					// the viewer itself
+	private Canvas3D canvas;			// The canvas we put everything on
+	private BranchGroup scene;		// The branchgroup of the scene
+	private ArrayList<Ship> livingShips = new ArrayList<Ship>();
 	
-	public UniverseBuilder(Canvas3D canvas) {
-		this.canvas = canvas;
+	// Singleton ====================================== Constructor ==================================
+	static UniverseBuilder uniqueInstance;
+	
+	public static synchronized UniverseBuilder getInstance(Canvas3D canvas) throws Exception_MC{
+		if( uniqueInstance == null){
+			uniqueInstance = new UniverseBuilder(canvas);
+			return uniqueInstance;
+		}
+		else{
+			return uniqueInstance;
+		}		
+	}
+	
+	private UniverseBuilder(Canvas3D canvas) {
+		this.setCanvas(canvas);
 		
 		/*
 		 * Creates a Java3D Virtual Universe for adding ships, board, background etc.
@@ -91,6 +108,41 @@ public class UniverseBuilder extends Object {
 
 	public void removeBranch(BranchGroup brGroup) {
 		loc.removeBranchGraph(brGroup);
-		
+	}
+	
+	public void addShipBranch(BranchGroup shipBranch){
+		this.scene.addChild(shipBranch);
+	}
+	
+	public void removeShipBranch(BranchGroup shipBranch){
+		this.scene.removeChild(shipBranch);
+	}
+
+	@Override
+	public void update(Ship ship) {
+		if(ship.isAlive() && !this.livingShips.contains(ship)){
+			this.livingShips.add(ship);
+			this.addShipBranch(ship.getBrGroup());
+		}
+		else if(!ship.isAlive() && this.livingShips.contains(ship)) {
+			this.livingShips.remove(ship);
+			this.removeShipBranch(ship.getBrGroup());
+		}
+	}
+
+	public Canvas3D getCanvas() {
+		return canvas;
+	}
+
+	public void setCanvas(Canvas3D canvas) {
+		this.canvas = canvas;
+	}
+
+	public BranchGroup getScene() {
+		return scene;
+	}
+
+	public void setScene(BranchGroup scene) {
+		this.scene = scene;
 	}
 }

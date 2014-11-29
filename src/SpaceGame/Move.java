@@ -1,16 +1,12 @@
 package SpaceGame;
 
-public abstract class Move extends Thread{
+public abstract class Move{
 	private Ship ship;
 	public abstract void undo();
-	public abstract void run();
+	public abstract void move();
 	
 	public Move(Ship sh){
 		this.ship = sh;
-	}
-	
-	public void move(){
-		this.run();
 	}
 
 	public Ship getShip() {

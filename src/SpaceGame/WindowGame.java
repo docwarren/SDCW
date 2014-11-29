@@ -15,10 +15,8 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 
 import com.sun.j3d.utils.applet.MainFrame;
-import com.sun.j3d.utils.geometry.Text2D;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import com.sun.j3d.utils.universe.ViewingPlatform;
 
 // A lot of cues taken from here:
 // http://www.java3d.org/animationinteraction.html
@@ -33,43 +31,31 @@ public class WindowGame extends Applet implements ActionListener{
 	private JButton switchMode = new JButton("Switch Mode");
 	private JButton quit = new JButton("Quit");
 	
-	
 	// For 3D rendering
+	UniverseBuilder universe;
 	private Canvas3D canvas;
-	private VirtualUniverse world;
-	private View view;
-	private TransformGroup bigGroup;
 	private Text3D banner;
 	
 	// Backend game machine variables
-	private CollisionController cc;
 	private MoveController mc;
-	private static ShipMother player;
-	private Factory_Ship shFactory;
-	private Factory_Move mvFactory;
-	private String[] shipTypes = {"BattleCruizer", "BattleShooter", "BattleStar"};
-	private static float TF_SCALE = 3.6f;
-	private static float SHIP_SCALE = 0.75f;
-	private static int MAXX = 4;
-	private static int MAXY = 4;
+	private static MotherShip player;
 	
 	// Start the game
 	public static void main(String[] args) throws Exception_MS, Exception_CM, Exception_MC{
 		WindowGame game = new WindowGame();
-		MainFrame frame = new MainFrame(game, 1200, 680);
+		//MainFrame frame = 
+		new MainFrame(game, 1200, 680);
 	}	
 	
 	public WindowGame() throws Exception_MS, Exception_CM, Exception_MC {
 		/*
 		 * Instantiates a new Window Space Game
 		 */
-		// Configuration
-		backendConfigure();
-		
 		// Front end creation
 		setLayout(new BorderLayout());
 		GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
 		canvas = new Canvas3D(config);
+		universe = UniverseBuilder.getInstance(canvas);
 		add("Center", canvas);
 		
 		JPanel panel = new JPanel();
@@ -87,49 +73,36 @@ public class WindowGame extends Applet implements ActionListener{
 		panel.add(move);
 		add("South", panel);
 		
+		// Configure the backend
+		mc = MoveController.getInstance(universe);
+		System.out.println(mc.getPositions().toString());
+		player = (MotherShip)mc.getShipFactory().createShip("MotherShip");
+		
 		// Render the Ships
 		BranchGroup scene = createScene();
-		UniverseBuilder universe = new UniverseBuilder(canvas);
-		universe.addBranchGraph(scene);
-	}
-	
-	private void backendConfigure() throws Exception_CM, Exception_MC, Exception_MS {
-		/*
-		 * Sets up the Collision Manager, MotherShip and MoveController Singletons
-		 * Creates a Ship Factory and a Move Factory
-		 */
-		cc = CollisionController.getInstance(MAXX, MAXY);
-		mc = MoveController.getInstance(MAXX, MAXY);
-		player = ShipMother.getInstance(cc, TF_SCALE);		// Create the mothership
-		mc.addShip(player); 								// Add the mothership to the game
-		player.notifyObservers();							// Update the collision detector about the position of the new ship
 		
-		shFactory = new Factory_Ship(cc, TF_SCALE);
-		mvFactory = new Factory_Move();
+		universe.addBranchGraph(scene);
+		// So that we can update ship positions directly through the UniverseBuilder as an observer
+		universe.setScene(scene);
+		player.notifyObservers();
 	}
 
 	public BranchGroup createScene(){
 		BranchGroup rootNode = new BranchGroup();
-		
+		rootNode.setCapability(BranchGroup.ALLOW_DETACH);
+		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_READ);
+		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
+		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
 		// Add the banner
 		TransformGroup textGroup = getBanner();
 		rootNode.addChild(textGroup);
 		
-		// Create a transform group so we can move stuff around
-		bigGroup = new TransformGroup();
-		bigGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		bigGroup.setCapability(TransformGroup.ALLOW_CHILDREN_EXTEND);
-		bigGroup.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);
-		
-		BranchGroup shipGroup = player.shipBranchGroup();
 		TransformGroup lightGroup = lightGroup();
 		TransformGroup board = boardGroup();
 		
 		// Add to the group
-		bigGroup.addChild(lightGroup);
-		bigGroup.addChild(shipGroup);
-		bigGroup.addChild(board);
-		rootNode.addChild(bigGroup);
+		rootNode.addChild(lightGroup);
+		rootNode.addChild(board);
 		
 		// Add a background image
 		Background bg = getSky();
@@ -226,16 +199,16 @@ public class WindowGame extends Applet implements ActionListener{
 		 * Creates the board for players to play on
 		 */
 		TransformGroup board = new TransformGroup();
-		for(int x = 0; x < MAXX; x++){
-			for(int y = 0; y < MAXY; y++){
+		for(int x = 0; x < mc.getMaxX(); x++){
+			for(int y = 0; y < mc.getMaxY(); y++){
 				TransformGroup sqGroup = new TransformGroup();
 				Square square;
 				if( ( x + y ) % 2 == 0) square = new Square("white");
 				else square = new Square("black");
 				
 				Transform3D moveTo = new Transform3D();
-				float sx = ( x * TF_SCALE ) - (TF_SCALE * 1.5f);
-				float sz = ( y * TF_SCALE ) - (TF_SCALE * 2.0f);
+				float sx = ( x * mc.getScale() ) - (mc.getScale() * 1.5f);
+				float sz = ( y * mc.getScale() ) - (mc.getScale() * 2.0f);
 				float sy = (-0.3f);
 				Vector3d pos = new Vector3d(sx, sy, sz);
 				
@@ -249,49 +222,29 @@ public class WindowGame extends Applet implements ActionListener{
 	}
 
 	private void undoMoves(){
-		cc.undoDeaths(mc);
 		mc.undoMove();
-		//renderScene();
+		//mc.renderShips();
 	}
 	
 	private void moveShips() throws Exception_MC, Exception_MS{
-		// Move the MotherShip first
-		String playerMoveType = mc.randomMove(player);
-		Move pmv = mvFactory.createMove(player, playerMoveType);
-		mc.getCurrentTurn().add(pmv);
-		
-		// Loop through all the positions
-		for(Position p: cc.getPositions()){
-			// For each ship create a new move
-			for(Ship sh: p.getShips()){
-				if(sh.getName() == "MotherShip") continue;
-				String moveType = mc.randomMove(sh);			// Randomly generate a move type
-				Move mv = mvFactory.createMove(sh, moveType);	// Create the appropriate move accordingly
-				mc.getCurrentTurn().add(mv);					// Add the moves to the list of moves to be executed this turn
-			}
-		}
-		
-		mc.executeTurn();
-		cc.resolveCollisions(mc, bigGroup, banner);
-		mc.renderShips();
-		
-		// Randomly create a new ship;
-		Random r = new Random();
-		int x = r.nextInt(3);
-		Ship newShip = null;
-		if(x == 0){
-			newShip = shFactory.createShip(shipTypes[r.nextInt(shipTypes.length)]);
-			// Add the new ship to the game
-			mc.addShip(newShip);
-			bigGroup.addChild(newShip.shipBranchGroup());
-			newShip.notifyObservers();	// Notify the collision manager about the new ship
-		}
-	}	
+		// Generate moves for all ships
+		Turn turn = mc.makeNewTurn();
+		// Execute the moves
+		mc.executeTurn(turn);
+//		mc.resolveCollisions(banner);
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		if(!player.isAlive()) banner.setString("GAME OVER!");
+		/*
+		 * Event listeners for quitting, switching between attack and defence, moving and undoing moves
+		 */
+		if(!player.isAlive()) {
+			banner.setString("GAME OVER!");
+			return;
+		}
 		else if(e.getSource() == move){
+			// System.out.println("MOVE");
 			try {
 				moveShips();
 			} catch (Exception_MC | Exception_MS e1) {
@@ -299,6 +252,7 @@ public class WindowGame extends Applet implements ActionListener{
 			}
 		}
 		else if(e.getSource() == undo){
+			// System.out.println("UNDO");
 			undoMoves();
 		}
 		else if(e.getSource() == quit){
@@ -308,12 +262,12 @@ public class WindowGame extends Applet implements ActionListener{
 			// Change the banner
 			if(player.isAttacking()) banner.setString("Passive mode");
 			else banner.setString("Aggressive mode");
-			// We have to remove the player branchgroup from the bigGroup
-			bigGroup.removeChild(player.getShape().getMesh().getParent().getParent());
+			// We have to remove the player branchgroup from the Locale
+			universe.removeBranch(player.getBrGroup());
 			// Switch to the other mesh properties
 			player.switchMode();
 			// and add a new Version of it, now that the mesh has changed
-			bigGroup.addChild(player.shipBranchGroup());
+			universe.addBranchGraph(player.shipBranchGroup());
 		}
 	}
 }

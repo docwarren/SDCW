@@ -1,24 +1,24 @@
 package SpaceGame;
 
-import javax.media.j3d.TransformGroup;
+import java.util.ArrayList;
 
-public class ShipMother extends Ship {
+public class MotherShip extends Ship {
 	private Boolean attackMode;
 	
 	// Singleton constructor
-	static ShipMother uniqueInstance;
+	static MotherShip uniqueInstance;
 	
-	private ShipMother(CollisionController cm, Position pos, float s) {
-		super(cm, pos, s);
+	private MotherShip(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s) {
+		super(universe, watchers, x, y, s);
 		this.attackMode = true;
 		this.setName("MotherShip");
-		this.setAlive(true);
 		this.setShape(new ShipShape_Player());
+		brGroup = shipBranchGroup();
 	}
 	
-	public static synchronized ShipMother getInstance(CollisionController cm, float s) throws Exception_MS{
+	public static synchronized MotherShip getInstance(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s) throws Exception_MS{
 		if( uniqueInstance == null){
-			uniqueInstance = new ShipMother(cm, cm.getRandomPosition(), s);
+			uniqueInstance = new MotherShip(universe, watchers, x, y, s);
 			return uniqueInstance;
 		}
 		else{

@@ -1,4 +1,6 @@
 package SpaceGame;
+import java.util.ArrayList;
+
 import javax.media.j3d.Alpha;
 import javax.media.j3d.BoundingBox;
 import javax.media.j3d.BoundingSphere;
@@ -14,7 +16,7 @@ import javax.vecmath.Vector3d;
 
 public abstract class Ship implements Observable{
 	private Boolean alive;
-	private CollisionController cm;
+	protected ArrayList<Position> positions;
 	private String name;
 	private int x;
 	private int y;
@@ -22,19 +24,30 @@ public abstract class Ship implements Observable{
 	private ShipShape shape;
 	private static float TF_SCALE;
 	private static float SIZE_SCALE = 0.75f;
-	BranchGroup brGroup;
+	protected BranchGroup brGroup;
+	protected UniverseBuilder universe;
 
-	public Ship(CollisionController cm, Position pos, float s){
-		this.cm = cm;
-		this.setX(pos.getX());
-		this.setY(pos.getY());
+	public Ship(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s){
+		this.positions = watchers;
+		this.setAlive(true);
+		this.setX(x);
+		this.setY(y);
 		this.setZ(0);
 		Ship.TF_SCALE = s;
-	}	
+		this.setUniverse(universe);
+	}
 	
 	@Override
 	public void notifyObservers() {
-		cm.update(this);		
+		/*
+		 * Tells all the positions squares the latest ship position
+		 * Tells the universe locale whether the ship is alive or not
+		 * If its alive it will be rendered, if not it will not be rendered
+		 */
+		for(Position p: this.positions){
+			p.update(this);
+		}
+		universe.update(this);
 	}
 	
 	// Move the ship
@@ -65,6 +78,7 @@ public abstract class Ship implements Observable{
 			this.x--;
 			this.y++;
 		}
+		updateShape();
 		notifyObservers();
 	}
 	
@@ -73,9 +87,9 @@ public abstract class Ship implements Observable{
 		 * Creates a Branch Group for rendering a ship in the correct position
 		 * Animation help from here: http://www.computing.northampton.ac.uk/~gary/csy3019/CSY3019SectionD.html
 		 */
-		brGroup = new BranchGroup();
-		brGroup.setCapability(BranchGroup.ALLOW_DETACH);// so that we can remove it from the scene later
-		brGroup.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
+		setBrGroup(new BranchGroup());
+		getBrGroup().setCapability(BranchGroup.ALLOW_DETACH);// so that we can remove it from the scene later
+		getBrGroup().setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
 		TransformGroup trGroup = new TransformGroup();
 		
 		// Set the capability bit so that we can move this ship after it is live
@@ -90,7 +104,7 @@ public abstract class Ship implements Observable{
 		PI.setBounds(bounds);
 		
 		// Add the trandformGroup to the branch
-		brGroup.addChild(trGroup);
+		getBrGroup().addChild(trGroup);
 		
 		// Get and reset the transform for the ship
 		Transform3D translate = this.moveShape();
@@ -106,7 +120,7 @@ public abstract class Ship implements Observable{
 		// Add the translation to the trGroup
 		trGroup.addChild(PI);
 		
-		return brGroup;
+		return getBrGroup();
 	}
 	
 	public void updateShape() {
@@ -135,10 +149,11 @@ public abstract class Ship implements Observable{
 		// then translate
 		float sx = (float)this.getX() * TF_SCALE - (TF_SCALE * 1.5f);
 		float sz = (float)this.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		float sy = (float)this.getZ() * 1.0f;
+		float sy = (float)this.getZ() * 0.6f;
 		Vector3d vt = new Vector3d(sx, sy, sz);
 		translate.setTranslation(vt);
 		translate.setScale(SIZE_SCALE);
+		
 		return translate;
 	}
 	
@@ -149,14 +164,6 @@ public abstract class Ship implements Observable{
 	}
 	public void setAlive(Boolean alive) {
 		this.alive = alive;
-	}
-
-	public CollisionController getCm() {
-		return this.cm;
-	}
-
-	public void setMc(CollisionController cm) {
-		this.cm = cm;
 	}
 
 	public String getName() {
@@ -197,5 +204,21 @@ public abstract class Ship implements Observable{
 
 	public void setShape(ShipShape shape) {
 		this.shape = shape;
+	}
+
+	BranchGroup getBrGroup() {
+		return brGroup;
+	}
+
+	void setBrGroup(BranchGroup brGroup) {
+		this.brGroup = brGroup;
+	}
+
+	UniverseBuilder getUniverse() {
+		return universe;
+	}
+
+	void setUniverse(UniverseBuilder universe) {
+		this.universe = universe;
 	}
 }
