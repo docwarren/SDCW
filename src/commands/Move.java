@@ -1,4 +1,4 @@
-package SpaceGame;
+package commands;
 
 import entities.Ship;
 

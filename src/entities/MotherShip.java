@@ -2,9 +2,8 @@ package entities;
 
 import graphics.ShipShape_Passive;
 import graphics.ShipShape_Player;
-
 import java.util.ArrayList;
-
+import behaviours.PlayerDeath;
 import SpaceGame.Exception_MS;
 import SpaceGame.UniverseBuilder;
 
@@ -18,6 +17,7 @@ public class MotherShip extends Ship {
 		super(universe, watchers, x, y, s);
 		this.attackMode = true;
 		this.setName("MotherShip");
+		Ship.setDeathBeaviour(new PlayerDeath());
 		this.setShape(new ShipShape_Player());
 		brGroup = shipBranchGroup();
 	}

@@ -3,38 +3,35 @@ import graphics.ShipShape;
 
 import java.util.ArrayList;
 
-import javax.media.j3d.Alpha;
-import javax.media.j3d.BoundingBox;
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Node;
-import javax.media.j3d.PositionInterpolator;
-import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 import SpaceGame.UniverseBuilder;
 import behaviours.DeathBehaviour;
-import behaviours.FlyBehaviour;
 
 public abstract class Ship implements Observable{
 	private Boolean alive;
-	protected ArrayList<Position> positions;
 	private String name;
+	
+	// Observer pattern
+	protected ArrayList<Position> positions;
+	
+	// Position
 	private int x;
 	private int y;
 	private int z;
+	
+	// Graphics
 	private ShipShape shape;
-	private static float TF_SCALE;
-	private static float SIZE_SCALE = 0.75f;
+	protected static float TF_SCALE;
+	protected static float SIZE_SCALE = 0.75f;
 	protected BranchGroup brGroup;
 	protected UniverseBuilder universe;
 	
 	// Strategy pattern
-	private static FlyBehaviour flyBehaviour;
 	private static DeathBehaviour deathBeaviour;
 
 	public Ship(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s){
@@ -47,6 +44,7 @@ public abstract class Ship implements Observable{
 		this.setUniverse(universe);
 	}
 	
+	// Observable interface implementation
 	@Override
 	public void notifyObservers() {
 		/*
@@ -63,10 +61,9 @@ public abstract class Ship implements Observable{
 	// Move the ship
 	public void move(String mv) {
 		/*
-		 * The board contains positions 00 to 33
+		 * The board contains positions 0,0 to MAXX, MAXY
 		 * Each ship occupies a position on the board
 		 * This position is independent of the ship's rendered position on screen.
-		 * The collision manager does not take account of the rendered position.
 		 */
 		if(mv.equals("U")) this.y--;
 		else if(mv.equals("D")) this.y++;
@@ -94,8 +91,7 @@ public abstract class Ship implements Observable{
 	
 	public BranchGroup shipBranchGroup() {
 		/*
-		 * Creates a Branch Group for rendering a ship in the correct position
-		 * Animation help from here: http://www.computing.northampton.ac.uk/~gary/csy3019/CSY3019SectionD.html
+		 * Creates a Branch Group for rendering a ship in the scene
 		 */
 		setBrGroup(new BranchGroup());
 		getBrGroup().setCapability(BranchGroup.ALLOW_DETACH);// so that we can remove it from the scene later
@@ -107,17 +103,11 @@ public abstract class Ship implements Observable{
 		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);		// so that we can add more transformations
 		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_READ);		// So we can get the mesh
 		
-		// Make an animator for the translation
-		Alpha alf = new Alpha(1, 3000);
-		PositionInterpolator PI = new PositionInterpolator(alf, trGroup);
-		BoundingSphere bounds = new BoundingSphere(new Point3d(0.0f, 0.0f,0.0f), 100.0f);
-		PI.setBounds(bounds);
-		
-		// Add the trandformGroup to the branch
+		// Add the trandformGroup to the root branch
 		getBrGroup().addChild(trGroup);
 		
-		// Get and reset the transform for the ship
-		Transform3D translate = this.moveShape();
+		// Get and reset the transform for the ship - determines where the ship is placed in space
+		Transform3D translate = moveShape();
 		trGroup.setTransform(translate);
 		
 		// Get the mesh for the ship
@@ -126,11 +116,9 @@ public abstract class Ship implements Observable{
 		
 		// Add the mesh to the transform group
 		trGroup.addChild(shipMesh);
-		
-		// Add the translation to the trGroup
-		trGroup.addChild(PI);
-		
-		return getBrGroup();
+		// The branchgroup will be added to the scene and is rendered as this ships mesh 
+		// and all of its movements, animations, textures etc.
+		return getBrGroup();		
 	}
 	
 	public void updateShape() {
@@ -234,5 +222,13 @@ public abstract class Ship implements Observable{
 
 	void setUniverse(UniverseBuilder universe) {
 		this.universe = universe;
+	}
+
+	public static DeathBehaviour getDeathBeaviour() {
+		return deathBeaviour;
+	}
+
+	public static void setDeathBeaviour(DeathBehaviour deathBeaviour) {
+		Ship.deathBeaviour = deathBeaviour;
 	}
 }

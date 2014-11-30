@@ -7,6 +7,8 @@ import java.util.Stack;
 
 import javax.media.j3d.Text3D;
 
+import commands.Move;
+
 import entities.MotherShip;
 import entities.Position;
 import entities.Ship;
@@ -120,13 +122,13 @@ public class MoveController{
 		/*
 		 * Executes each move on the stack
 		 */
-		moves++;
+		moves++;			// Counting turns for displaying on the banner
 		Turn turn = makeNewTurn();
 		for(Move mv: turn.getMoves()){
-			mv.run();
+			mv.run();	// Used instead of start() to allow delays to be sequential rather than parallel
 		}
 		try {
-			resolveFights(turn);
+			resolveCollisions(turn);
 		} catch (Exception_MC | Exception_MS e) {
 			e.printStackTrace();
 		}
@@ -147,7 +149,7 @@ public class MoveController{
 		System.out.println("-----------------------------------------------------------------------------------");
 	}
 	
-	private void resolveFights(Turn turn) throws Exception_MC, Exception_MS{
+	private void resolveCollisions(Turn turn) throws Exception_MC, Exception_MS{
 		/*
 		 * Resolve any conflict in a player square
 		 */
@@ -155,12 +157,14 @@ public class MoveController{
 		player = (MotherShip) shFactory.createShip("MotherShip");
 		Position p = getPosition(player.getX(), player.getY());
 		int size = p.getShips().size();
+		// If there is only one player on the square it is the player
 		if(size == 1) {
 			banner.setString("Kills:" + kills + "  Moves:" + moves);
 			return;
 		}
+		// If there is only one enemy on the square Mothership wins
 		else if(size == 2){
-			kills++;
+			kills++;			// Counting kills for displaying on the banner
 			System.out.println("Enemy Destroyed!");
 			banner.setString("Enemy Destroyed!");
 			for(int i = 0; i < p.getShips().size(); i++){
@@ -170,8 +174,9 @@ public class MoveController{
 				}
 			}
 		}
+		// If there are 2 enemies on the square MotherShip only wins if she is in attack mode
 		else if(size == 3 && player.isAttacking()){
-			kills += 2;
+			kills += 2;			// Counting kills for displaying on the banner
 			System.out.println("Twice as Nice!");
 			banner.setString("Twice as Nice!");
 			Ship x = null;
@@ -185,7 +190,7 @@ public class MoveController{
 				}
 			}
 			k.die();	// Have to do this because the arraylist gets shorter as ships die 
-			x.die();	// Could use a hashmap but there are only 2
+			x.die();	// Could use a hashmap but there are only 2 to deal with
 		}
 		else{
 			player.die();
@@ -200,7 +205,7 @@ public class MoveController{
 		if(!turns.isEmpty()){
 			// Get the last turn
 			Turn turn = popTurn();
-			moves--;
+			moves--;			// Counting moves for displaying on the banner
 			banner.setString("Kills: " + kills + "  Moves: " + moves);
 			
 			// Destroy any ships that were created by the turn
@@ -224,7 +229,7 @@ public class MoveController{
 			}
 		}
 		
-		// Modify the z position based on the number of ships on each position.
+		// Modify the z position based on the number of ships on each position. ( so they don't overlap )
 		for(Position p: this.positions){
 			System.out.print(p.getX() + "," + p.getY() + ": ");
 			for(int i = 0; i < p.getShips().size(); i++){

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="SpaceGame.Move" project="SDCW" file="/SDCW/src/SpaceGame/Move.java" binary="false" 
+  <class id="1" language="java" name="commands.Move" project="SDCW" file="/SDCW/src/commands/Move.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1175" y="1016"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -10,7 +10,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="SpaceGame.MoveDown" project="SDCW" file="/SDCW/src/SpaceGame/MoveDown.java" 
+  <class id="2" language="java" name="commands.MoveDown" project="SDCW" file="/SDCW/src/commands/MoveDown.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1474" y="1097"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -19,7 +19,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="SpaceGame.MoveLeft" project="SDCW" file="/SDCW/src/SpaceGame/MoveLeft.java" 
+  <class id="3" language="java" name="commands.MoveLeft" project="SDCW" file="/SDCW/src/commands/MoveLeft.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1307" y="819"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -28,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="SpaceGame.MoveRight" project="SDCW" file="/SDCW/src/SpaceGame/MoveRight.java" 
+  <class id="4" language="java" name="commands.MoveRight" project="SDCW" file="/SDCW/src/commands/MoveRight.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1474" y="965"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -37,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="SpaceGame.MoveUp" project="SDCW" file="/SDCW/src/SpaceGame/MoveUp.java" 
+  <class id="5" language="java" name="commands.MoveUp" project="SDCW" file="/SDCW/src/commands/MoveUp.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1441" y="818"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -163,7 +163,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="SpaceGame.MoveUpRight" project="SDCW" file="/SDCW/src/SpaceGame/MoveUpRight.java" 
+  <class id="19" language="java" name="commands.MoveUpRight" project="SDCW" file="/SDCW/src/commands/MoveUpRight.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1479" y="1238"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -172,7 +172,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="SpaceGame.MoveUpLeft" project="SDCW" file="/SDCW/src/SpaceGame/MoveUpLeft.java" 
+  <class id="20" language="java" name="commands.MoveUpLeft" project="SDCW" file="/SDCW/src/commands/MoveUpLeft.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1325" y="1239"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -181,8 +181,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="SpaceGame.MoveDownRight" project="SDCW" 
-    file="/SDCW/src/SpaceGame/MoveDownRight.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="commands.MoveDownRight" project="SDCW" 
+    file="/SDCW/src/commands/MoveDownRight.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1169" y="1240"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -190,8 +190,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="SpaceGame.MoveDownLeft" project="SDCW" 
-    file="/SDCW/src/SpaceGame/MoveDownLeft.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="22" language="java" name="commands.MoveDownLeft" project="SDCW" file="/SDCW/src/commands/MoveDownLeft.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1156" y="821"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

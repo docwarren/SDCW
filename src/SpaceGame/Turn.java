@@ -2,6 +2,8 @@ package SpaceGame;
 
 import java.util.ArrayList;
 
+import commands.Move;
+
 import entities.Ship;
 
 public class Turn {

@@ -1,5 +1,14 @@
 package SpaceGame;
 
+import commands.Move;
+import commands.MoveDown;
+import commands.MoveDownLeft;
+import commands.MoveDownRight;
+import commands.MoveLeft;
+import commands.MoveRight;
+import commands.MoveUp;
+import commands.MoveUpLeft;
+import commands.MoveUpRight;
 import entities.Ship;
 
 public class Move_Factory {

@@ -53,9 +53,6 @@ public class WindowGame extends Applet implements ActionListener{
 		/*
 		 * Instantiates a new Window Space Game
 		 */
-		GraphicsEnvironment g = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		String[] o = g.getAvailableFontFamilyNames();
-		for(String s: o) System.out.println(s);
 		// Front end creation
 		setLayout(new BorderLayout());
 		GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
@@ -122,11 +119,7 @@ public class WindowGame extends Applet implements ActionListener{
 		 */
 		// Font and text
 		// Help from here: http://www.java2s.com/Code/Java/3D/RendersaJava3D3DTextobjectswithacustomextrusion.htm
-		double X1 = 0;
-	    double Y1 = 0;
-	    double X2 = 3;
-	    double Y2 = 0;
-	    Shape extrusionShape = new java.awt.geom.Line2D.Double(X1, Y1, X2, Y2);
+	    Shape extrusionShape = new java.awt.geom.Line2D.Double(0, 0, 2, 0);
 
 	    FontExtrusion fontEx = new FontExtrusion(extrusionShape);
 		Font3D font = new Font3D(new Font("TlwgTypewriter", Font.BOLD, 14), fontEx);
@@ -250,6 +243,7 @@ public class WindowGame extends Applet implements ActionListener{
 		/*
 		 * Event listeners for quitting, switching between attack and defence, moving and undoing moves
 		 */
+		//System.out.println(e.toString());
 		if(e.getSource() == quit){
 			System.exit(0);
 		}

@@ -1,21 +1,21 @@
-package SpaceGame;
+package commands;
 
 import entities.Ship;
 
-public class MoveDown extends Move {
+public class MoveRight extends Move {
 
-	public MoveDown(Ship sh) {
+	public MoveRight(Ship sh) {
 		super(sh);
 	}
 
 	@Override
 	public void undo() {
-		this.getShip().move("U");
+		this.getShip().move("L");
 	}
-
+	
 	@Override
 	public void move() {
-//		this.getShip().move("D");
+//		this.getShip().move("R");
 	}
 
 	@Override
@@ -26,6 +26,6 @@ public class MoveDown extends Move {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.getShip().move("D");
+		this.getShip().move("R");
 	}
 }
