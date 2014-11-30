@@ -3,6 +3,12 @@ package SpaceGame;
 import java.util.ArrayList;
 import java.util.Random;
 
+import entities.BattleCruizer;
+import entities.BattleStar;
+import entities.MotherShip;
+import entities.Position;
+import entities.Ship;
+
 public class Ship_Factory {
 	private ArrayList<Position> positions;
 	private float scale;

@@ -1,6 +1,12 @@
-package SpaceGame;
+package entities;
+
+import graphics.ShipShape_Passive;
+import graphics.ShipShape_Player;
 
 import java.util.ArrayList;
+
+import SpaceGame.Exception_MS;
+import SpaceGame.UniverseBuilder;
 
 public class MotherShip extends Ship {
 	private Boolean attackMode;

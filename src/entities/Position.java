@@ -1,6 +1,8 @@
-package SpaceGame;
+package entities;
 
 import java.util.ArrayList;
+
+import SpaceGame.UniverseBuilder;
 
 public class Position implements Observer{
 	private int x;

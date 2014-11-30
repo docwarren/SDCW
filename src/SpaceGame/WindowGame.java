@@ -4,7 +4,6 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import javax.media.j3d.*;
 import javax.swing.JButton;
@@ -17,6 +16,9 @@ import javax.vecmath.Vector3f;
 import com.sun.j3d.utils.applet.MainFrame;
 import com.sun.j3d.utils.image.TextureLoader;
 import com.sun.j3d.utils.universe.SimpleUniverse;
+
+import entities.MotherShip;
+import graphics.Square;
 
 // A lot of cues taken from here:
 // http://www.java3d.org/animationinteraction.html
@@ -51,6 +53,9 @@ public class WindowGame extends Applet implements ActionListener{
 		/*
 		 * Instantiates a new Window Space Game
 		 */
+		GraphicsEnvironment g = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		String[] o = g.getAvailableFontFamilyNames();
+		for(String s: o) System.out.println(s);
 		// Front end creation
 		setLayout(new BorderLayout());
 		GraphicsConfiguration config = SimpleUniverse.getPreferredConfiguration();
@@ -116,16 +121,25 @@ public class WindowGame extends Applet implements ActionListener{
 		 * Get a banner for showing scores etc.
 		 */
 		// Font and text
-		Font3D font = new Font3D(new Font("SanSerif", Font.BOLD, 12), new FontExtrusion());
+		// Help from here: http://www.java2s.com/Code/Java/3D/RendersaJava3D3DTextobjectswithacustomextrusion.htm
+		double X1 = 0;
+	    double Y1 = 0;
+	    double X2 = 3;
+	    double Y2 = 0;
+	    Shape extrusionShape = new java.awt.geom.Line2D.Double(X1, Y1, X2, Y2);
+
+	    FontExtrusion fontEx = new FontExtrusion(extrusionShape);
+		Font3D font = new Font3D(new Font("TlwgTypewriter", Font.BOLD, 14), fontEx);
 		banner = new Text3D(font, "Space Wars!");
 		// Allow it to be modified after compiling
 		banner.setCapability(Text3D.ALLOW_STRING_WRITE);
+		mc.setBanner(banner);// Tell the MC(Move Controller changes it when kills are made
 		// Get a decent texture
 		Appearance ap = bannerAppearance();
 		Shape3D bannerShape = new Shape3D(banner, ap);
 		TransformGroup textGroup = new TransformGroup();
 		Transform3D textTf = new Transform3D();
-		textTf.setTranslation(new Vector3d(-5.0f, 0.0f, -10.0f));
+		textTf.setTranslation(new Vector3d(-7.0f, 0.0f, -10.0f));
 		textTf.setScale(0.1);
 		textGroup.setTransform(textTf);
 		textGroup.addChild(bannerShape);
@@ -135,14 +149,20 @@ public class WindowGame extends Applet implements ActionListener{
 	private Appearance bannerAppearance(){
 		Appearance a = new Appearance();
 		// Set a material manually
-		Color3f ambient = new Color3f(1.0f, 0.9f, 0.9f);
-		Color3f diffuse = new Color3f(1.0f, 0.9f, 0.9f);
-		Color3f specular = new Color3f(1.0f, 1.0f, 1.0f);
+		Color3f ambient = rgbToCol3f(173, 9, 0);
+		Color3f diffuse = rgbToCol3f(255, 247, 133);
+		Color3f specular = rgbToCol3f(239, 255, 168);
 		Color3f emissive = new Color3f(0.0f, 0.0f, 0.0f);
 		float shiny = 40.0f;
 		Material material = new Material(ambient, emissive, diffuse, specular, shiny);
 		a.setMaterial(material);
 		return a;
+	}
+	
+	// Find colours here: http://color.hailpixel.com
+	// They come in rgb and hex so we convert them to Color3f with this method 
+	private Color3f rgbToCol3f(int i, int j, int k) {
+		return new Color3f((float)i / 256, (float)j / 256, (float)k / 256);
 	}
 
 	private Background getSky() {
@@ -225,35 +245,24 @@ public class WindowGame extends Applet implements ActionListener{
 		mc.undoMove();
 	}
 	
-	private void moveShips() throws Exception_MC, Exception_MS{
-		// Generate moves for all ships
-		Turn turn = mc.makeNewTurn();
-		// Execute the moves
-		mc.executeTurn(turn);
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e){
 		/*
 		 * Event listeners for quitting, switching between attack and defence, moving and undoing moves
 		 */
-		if(!player.isAlive()) {
+		if(e.getSource() == quit){
+			System.exit(0);
+		}
+		else if(!player.isAlive()) {
 			banner.setString("GAME OVER!");
 			return;
 		}
 		else if(e.getSource() == move){
-			try {
-				moveShips();
-			} catch (Exception_MC | Exception_MS e1) {
-				e1.printStackTrace();
-			}
+			mc.executeTurn();
 		}
 		else if(e.getSource() == undo){
 			System.out.println("UNDO");
 			undoMoves();
-		}
-		else if(e.getSource() == quit){
-			System.exit(0);
 		}
 		else if(e.getSource() == switchMode){
 			// Change the banner

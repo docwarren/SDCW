@@ -1,6 +1,10 @@
-package SpaceGame;
+package entities;
+
+import graphics.ShipShape_Enemy;
 
 import java.util.ArrayList;
+
+import SpaceGame.UniverseBuilder;
 
 public class BattleStar extends Ship {
 

@@ -1,5 +1,7 @@
 package SpaceGame;
 
+import entities.Ship;
+
 public class MoveLeft extends Move {
 
 	public MoveLeft(Ship sh) {
@@ -13,6 +15,17 @@ public class MoveLeft extends Move {
 	
 	@Override
 	public void move() {
+//		this.getShip().move("L");
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.getShip().move("L");
 	}
 }

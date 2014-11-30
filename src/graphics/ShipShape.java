@@ -1,4 +1,4 @@
-package SpaceGame;
+package graphics;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -45,6 +45,12 @@ public abstract class ShipShape{
 	
 	public Shape3D getMesh(){
 		return shipShape;
+	}
+	
+	// Find colours here: http://color.hailpixel.com
+	// They come in rgb and hex so we convert them to Color3f with this method 
+	public Color3f rgbToCol3f(int i, int j, int k) {
+		return new Color3f((float)i / 256, (float)j / 256, (float)k / 256);
 	}
 	
 	public Appearance getAppearance(){

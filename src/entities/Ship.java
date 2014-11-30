@@ -1,4 +1,6 @@
-package SpaceGame;
+package entities;
+import graphics.ShipShape;
+
 import java.util.ArrayList;
 
 import javax.media.j3d.Alpha;
@@ -14,6 +16,10 @@ import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
+import SpaceGame.UniverseBuilder;
+import behaviours.DeathBehaviour;
+import behaviours.FlyBehaviour;
+
 public abstract class Ship implements Observable{
 	private Boolean alive;
 	protected ArrayList<Position> positions;
@@ -26,6 +32,10 @@ public abstract class Ship implements Observable{
 	private static float SIZE_SCALE = 0.75f;
 	protected BranchGroup brGroup;
 	protected UniverseBuilder universe;
+	
+	// Strategy pattern
+	private static FlyBehaviour flyBehaviour;
+	private static DeathBehaviour deathBeaviour;
 
 	public Ship(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s){
 		this.positions = watchers;
@@ -157,10 +167,9 @@ public abstract class Ship implements Observable{
 		return translate;
 	}
 	
-	public int die() {
+	public void die() {
 		this.setAlive(false);
 		this.notifyObservers();
-		return 1;
 	}
 	
 	//============================================Getters and Setters=============================
@@ -211,7 +220,7 @@ public abstract class Ship implements Observable{
 		this.shape = shape;
 	}
 
-	BranchGroup getBrGroup() {
+	public BranchGroup getBrGroup() {
 		return brGroup;
 	}
 

@@ -7,6 +7,10 @@ import java.util.Stack;
 
 import javax.media.j3d.Text3D;
 
+import entities.MotherShip;
+import entities.Position;
+import entities.Ship;
+
 public class MoveController{
 	private Stack<Turn> turns;		// Keep track of all turns
 	private ArrayList<Position> positions;		// Keeps track of where all the ships are
@@ -17,6 +21,9 @@ public class MoveController{
 	private static float TF_SCALE = 3.6f;
 	private static int MAXX = 4;
 	private static int MAXY = 4;
+	private Text3D banner;
+	private int kills;
+	private int moves;
 	
 	// Singleton ====================================== Constructor ==================================
 	static MoveController uniqueInstance;
@@ -109,12 +116,14 @@ public class MoveController{
 		return turn;
 	}
 	
-	public void executeTurn(Turn turn) {
+	public void executeTurn() {
 		/*
 		 * Executes each move on the stack
 		 */
+		moves++;
+		Turn turn = makeNewTurn();
 		for(Move mv: turn.getMoves()){
-			mv.move();
+			mv.run();
 		}
 		try {
 			resolveFights(turn);
@@ -139,32 +148,48 @@ public class MoveController{
 	}
 	
 	private void resolveFights(Turn turn) throws Exception_MC, Exception_MS{
-		// TODO Auto-generated method stub
+		/*
+		 * Resolve any conflict in a player square
+		 */
 		MotherShip player;
 		player = (MotherShip) shFactory.createShip("MotherShip");
 		Position p = getPosition(player.getX(), player.getY());
 		int size = p.getShips().size();
-		int result;
-		if(size == 1) return;
+		if(size == 1) {
+			banner.setString("Kills:" + kills + "  Moves:" + moves);
+			return;
+		}
 		else if(size == 2){
-			System.out.println("Mothership wins");
-			for(Ship sh: p.getShips()){
-				if(sh != player) result = sh.die();
-				// Ensure that we record the death in the turn object
-				turn.addKilledShip(sh);
+			kills++;
+			System.out.println("Enemy Destroyed!");
+			banner.setString("Enemy Destroyed!");
+			for(int i = 0; i < p.getShips().size(); i++){
+				if(p.getShips().get(i) != player) {
+					turn.addKilledShip(p.getShips().get(i));		// Ensure that we record the death in the turn object
+					p.getShips().get(i).die();
+				}
 			}
 		}
 		else if(size == 3 && player.isAttacking()){
-			System.out.println("twice as nice");
-			for(Ship sh: p.getShips()){
-				if(sh != player) result = sh.die();
-				// Ensure that we record the death in the turn object
-				turn.addKilledShip(sh);
+			kills += 2;
+			System.out.println("Twice as Nice!");
+			banner.setString("Twice as Nice!");
+			Ship x = null;
+			Ship k = null;
+			for(int i = 0; i < size; i++){
+				
+				if(p.getShips().get(i) != player) {
+					turn.addKilledShip(p.getShips().get(i));		// Ensure that we record the death in the turn object
+					if(x == null) x = p.getShips().get(i);
+					else k = p.getShips().get(i);
+				}
 			}
+			k.die();	// Have to do this because the arraylist gets shorter as ships die 
+			x.die();	// Could use a hashmap but there are only 2
 		}
 		else{
-			result = player.die();
-			System.out.println("GAME OVER");
+			player.die();
+			banner.setString("GAME OVER");
 		}
 	}
 
@@ -175,6 +200,8 @@ public class MoveController{
 		if(!turns.isEmpty()){
 			// Get the last turn
 			Turn turn = popTurn();
+			moves--;
+			banner.setString("Kills: " + kills + "  Moves: " + moves);
 			
 			// Destroy any ships that were created by the turn
 			if(turn.getNewShip() != null){
@@ -186,6 +213,8 @@ public class MoveController{
 			// Recreate any ships killed by the turn
 			for(Ship sh: turn.getKilledShips()){
 				System.out.println("Ship killed here");
+				kills--;
+				banner.setString("Kills: " + kills + "  Moves: " + moves);
 				sh.setAlive(true);
 				sh.notifyObservers();
 			}
@@ -194,6 +223,18 @@ public class MoveController{
 				if(shipExists(mv.getShip())) mv.undo();
 			}
 		}
+		
+		// Modify the z position based on the number of ships on each position.
+		for(Position p: this.positions){
+			System.out.print(p.getX() + "," + p.getY() + ": ");
+			for(int i = 0; i < p.getShips().size(); i++){
+				System.out.print(p.getShips().get(i).getName() + "; ");
+				p.getShips().get(i).setZ(i);
+				p.getShips().get(i).updateShape();
+			}
+			System.out.print("\n");
+		}
+		System.out.println("-----------------------------------------------------------------------------------");
 	}
 	
 	public Ship getShipByName(String name){
@@ -205,12 +246,14 @@ public class MoveController{
 				if(sh.getName() == name) return sh;
 			}
 		}
-		
 		return null;
 	}
 
 	//================================================Collision Management====================================
 	public Position getPosition(int x, int y){
+		/*
+		 * Given the x and y coordinates of a ship will return the position the ship is at
+		 */
 		for(Position pos: this.positions){
 			if(pos.getX() == x && pos.getY() == y){
 				return pos;
@@ -264,5 +307,13 @@ public class MoveController{
 	
 	public int getMaxY(){
 		return MAXY;
+	}
+
+	public Text3D getBanner() {
+		return banner;
+	}
+
+	public void setBanner(Text3D banner) {
+		this.banner = banner;
 	}
 }

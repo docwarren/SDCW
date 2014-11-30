@@ -1,5 +1,8 @@
 package SpaceGame;
 
+import entities.Observer;
+import entities.Ship;
+
 import java.util.ArrayList;
 
 import javax.media.j3d.BranchGroup;

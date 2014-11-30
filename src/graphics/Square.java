@@ -1,4 +1,4 @@
-package SpaceGame;
+package graphics;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;

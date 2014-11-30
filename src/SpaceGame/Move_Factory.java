@@ -1,5 +1,7 @@
 package SpaceGame;
 
+import entities.Ship;
+
 public class Move_Factory {
 	
 	public Move_Factory() {

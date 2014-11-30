@@ -1,6 +1,8 @@
 package SpaceGame;
 
-public abstract class Move{
+import entities.Ship;
+
+public abstract class Move implements Runnable{
 	private Ship ship;
 	public abstract void undo();
 	public abstract void move();
