@@ -87,6 +87,7 @@ public class WindowGame extends Applet implements ActionListener{
 		// So that we can update ship positions directly through the UniverseBuilder as an observer
 		universe.setScene(scene);
 		player.notifyObservers();
+		
 	}
 
 	public BranchGroup createScene(){
@@ -252,7 +253,7 @@ public class WindowGame extends Applet implements ActionListener{
 			return;
 		}
 		else if(e.getSource() == move){
-			mc.executeTurn();
+			mc.executeTurn(player);
 		}
 		else if(e.getSource() == undo){
 			System.out.println("UNDO");

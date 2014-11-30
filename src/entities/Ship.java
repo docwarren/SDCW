@@ -4,6 +4,8 @@ import graphics.ShipShape;
 import java.util.ArrayList;
 
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.PositionInterpolator;
+import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
@@ -103,14 +105,16 @@ public abstract class Ship implements Observable{
 		// Set the capability bit so that we can move this ship after it is live
 		trGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);	// so that we can modify it
 		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);		// so that we can add more transformations
-		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_READ);		// So we can get the mesh
+		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_READ);		// So we can get the mesh		
 		
 		// Add the trandformGroup to the root branch
 		getBrGroup().addChild(trGroup);
 		
 		// Get and reset the transform for the ship - determines where the ship is placed in space
-		Transform3D translate = this.getFlyBehaviour().moveShape(this);
-		trGroup.setTransform(translate);
+//		Transform3D translate = this.getFlyBehaviour().moveShape(this);
+		
+//		trGroup.setTransform(translate);
+		
 		
 		// Get the mesh for the ship
 		ShipShape structure = this.getShape();
@@ -118,9 +122,11 @@ public abstract class Ship implements Observable{
 		
 		// Add the mesh to the transform group
 		trGroup.addChild(shipMesh);
+		
+		this.flyBehaviour.fly(this);
 		// The branchgroup will be added to the scene and is rendered as this ships mesh 
 		// and all of its movements, animations, textures etc.
-		return getBrGroup();		
+		return getBrGroup();
 	}
 	
 	public void die() {

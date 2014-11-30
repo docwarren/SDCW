@@ -7,28 +7,27 @@ import javax.vecmath.Vector3d;
 import entities.MotherShip;
 import entities.Ship;
 
-public class PlayerFlight implements FlyBehaviour{
+public class PlayerFlight implements FlyBehaviour {
+
 	protected static float TF_SCALE = 3.6f;
 	protected static float SIZE_SCALE = 0.75f;
-	public static float SPEED;
-	private MotherShip ship;
 	
 	@Override
-	public void fly(Ship sh) {
+	public void fly(Ship ship) {
 		/*
 		 * This updates the graph scene node with new Translation for this entity
 		 */
-		this.ship = (MotherShip)sh;
+		ship = (MotherShip) ship;
 		TransformGroup thisGroup = (TransformGroup)ship.getShape().getMesh().getParent();
 		// Add the current transform Node to the branch group
 		Transform3D mv = moveShape(ship);
-		thisGroup.setTransform(mv);
+        thisGroup.setTransform(mv);                                                                                                                                                                                                                            
 	}
 
 	public Transform3D moveShape(Ship ship){
 		/*
 		 * Gets the current transform for this Ship based on its board position
-		 */
+		 */                                                                                                                                                                                                                                                                                                                                                                         
 		Transform3D translate = new Transform3D();
 		Transform3D rotate = new Transform3D();
 		

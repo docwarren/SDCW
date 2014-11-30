@@ -14,12 +14,12 @@ import entities.Position;
 import entities.Ship;
 
 public class MoveController{
-	private Stack<Turn> turns;		// Keep track of all turns
+	private Stack<Turn> turns;					// Keep track of all turns
 	private ArrayList<Position> positions;		// Keeps track of where all the ships are
-	private Move_Factory mvFactory;		// Generates moves
-	private UniverseBuilder universe;
+	private Move_Factory mvFactory;				// Generates moves
+	private UniverseBuilder universe;			// Has methods for adding and removing objects to the scene
 	private static String[] SHIPTYPES = {"BattleCruizer", "BattleShooter", "BattleStar"};
-	private Ship_Factory shFactory;
+	private Ship_Factory shFactory;				// Generates ships
 	private static float TF_SCALE = 3.6f;
 	private static int MAXX = 4;
 	private static int MAXY = 4;
@@ -27,7 +27,7 @@ public class MoveController{
 	private int kills;
 	private int moves;
 	
-	// Singleton ====================================== Constructor ==================================
+	// Singleton ====================================== Constructor ==============================================
 	static MoveController uniqueInstance;
 	
 	private MoveController(UniverseBuilder universe){
@@ -54,7 +54,7 @@ public class MoveController{
 		}		
 	}
 	
-	// ==============================================Class Methods====================================
+	// ==============================================Class Methods================================================
 	// Generate a random move for a ship
 	public String randomMove(Ship sh){
 		ArrayList<String> possibleMoves = new ArrayList<String>(Arrays.asList("U", "D", "R", "L", "UL", "UR", "DR", "DL"));
@@ -117,12 +117,13 @@ public class MoveController{
 		return turn;
 	}
 	
-	public void executeTurn() {
+	public void executeTurn(MotherShip player) {
 		/*
 		 * Executes each move on the stack
 		 */
 		moves++;			// Counting turns for displaying on the banner
 		Turn turn = makeNewTurn();
+		turn.getMoves().sort(new turnSort(player));
 		for(Move mv: turn.getMoves()){
 			mv.run();	// Used instead of start() to allow delays to be sequential rather than parallel
 		}
@@ -145,7 +146,7 @@ public class MoveController{
 			}
 			System.out.print("\n");
 		}
-		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------------------");
 	}
 	
 	private void resolveCollisions(Turn turn) throws Exception_MC, Exception_MS{
@@ -161,7 +162,7 @@ public class MoveController{
 			banner.setString("Kills:" + kills + "  Moves:" + moves);
 			return;
 		}
-		// If there is only one enemy on the square Mothership wins
+		// If there is only one enemy on the square MotherShip wins
 		else if(size == 2){
 			kills++;			// Counting kills for displaying on the banner
 			System.out.println("Enemy Destroyed!");
@@ -188,12 +189,14 @@ public class MoveController{
 					else k = p.getShips().get(i);
 				}
 			}
-			k.die();	// Have to do this because the arraylist gets shorter as ships die 
-			x.die();	// Could use a hashmap but there are only 2 to deal with
+			k.die();	// Have to do this because the array-list gets shorter as ships die 
+			x.die();	// Could use a hash-map but there are only 2 to deal with
 		}
 		else{
 			player.die();
-			banner.setString("GAME OVER");
+			if(kills > 1 || kills == 0) banner.setString("GAME OVER: " + kills + " kills.");
+			else banner.setString("GAME OVER: " + kills + " kill.");
+			
 		}
 	}
 
@@ -239,12 +242,12 @@ public class MoveController{
 			}
 			System.out.print("\n");
 		}
-		System.out.println("-----------------------------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------------------");
 	}
 	
 	public Ship getShipByName(String name){
 		/*
-		 * Only used for getting the mothership really
+		 * Only used for getting the mother-ship really
 		 */
 		for(Position pos: this.positions){
 			for(Ship sh: pos.getShips()){
@@ -267,7 +270,7 @@ public class MoveController{
 		return null;
 	}
 	
-	//================================================List modifiers===================================
+	//================================================List modifiers==========================================
 	// Push a turn onto the stack
 	public void pushTurn(Turn turn){
 		this.turns.push(turn);
@@ -285,7 +288,7 @@ public class MoveController{
 		return false;
 	}
 	
-	//===================================Getters and setters============================================
+	//===============================================Getters and setters======================================
 	public ArrayList<Position> getPositions() {
 		return positions;
 	}
