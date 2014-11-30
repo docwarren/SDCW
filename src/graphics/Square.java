@@ -18,7 +18,7 @@ public class Square {
 	
 	public Square(String colour){
 		if(colour.equals("white")){
-			this.ambient = new Color3f(1.0f, 1.0f, 1.0f);
+			this.ambient = new Color3f(0.1f, 0.1f, 0.1f);
 			this.diffuse = new Color3f(1.0f, 1.0f, 1.0f);
 			this.specular = new Color3f(1.0f, 1.0f, 1.0f);
 		}
@@ -38,7 +38,7 @@ public class Square {
 		// From here: http://www.vrupl.evl.uic.edu/LabAccidents/java3d/lesson07/index.html
 		TransparencyAttributes ta = new TransparencyAttributes();
 		ta.setTransparencyMode(ta.BLENDED);
-		ta.setTransparency(0.28f);
+		ta.setTransparency(0.5f);
 		a.setTransparencyAttributes(ta);		
 		
 		// Set the colours

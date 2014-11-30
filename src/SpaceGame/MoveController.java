@@ -106,7 +106,6 @@ public class MoveController{
 			try {
 				newShip = shFactory.createShip(shipType);
 			} catch (Exception_MC | Exception_MS e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			// Notifies all the positions where this ship is and the Universe about the ship position and alive state
@@ -133,16 +132,16 @@ public class MoveController{
 			e.printStackTrace();
 		}
 		
-		
 		pushTurn(turn);
 		
 		// Modify the z position based on the number of ships on each position.
 		for(Position p: this.positions){
 			System.out.print(p.getX() + "," + p.getY() + ": ");
 			for(int i = 0; i < p.getShips().size(); i++){
-				System.out.print(p.getShips().get(i).getName() + "; ");
-				p.getShips().get(i).setZ(i);
-				p.getShips().get(i).updateShape();
+				Ship ship = p.getShips().get(i);
+				System.out.print(ship.getName() + "; ");
+				ship.setZ(i);
+				ship.getFlyBehaviour().fly(ship);
 			}
 			System.out.print("\n");
 		}
@@ -233,9 +232,10 @@ public class MoveController{
 		for(Position p: this.positions){
 			System.out.print(p.getX() + "," + p.getY() + ": ");
 			for(int i = 0; i < p.getShips().size(); i++){
-				System.out.print(p.getShips().get(i).getName() + "; ");
-				p.getShips().get(i).setZ(i);
-				p.getShips().get(i).updateShape();
+				Ship ship = p.getShips().get(i);
+				System.out.print(ship.getName() + "; ");
+				ship.setZ(i);
+				ship.getFlyBehaviour().fly(ship);
 			}
 			System.out.print("\n");
 		}

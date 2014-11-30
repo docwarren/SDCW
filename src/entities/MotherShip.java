@@ -4,20 +4,22 @@ import graphics.ShipShape_Passive;
 import graphics.ShipShape_Player;
 import java.util.ArrayList;
 import behaviours.PlayerDeath;
+import behaviours.PlayerFlight;
 import SpaceGame.Exception_MS;
 import SpaceGame.UniverseBuilder;
 
 public class MotherShip extends Ship {
 	private Boolean attackMode;
-	
+
 	// Singleton constructor
 	static MotherShip uniqueInstance;
 	
-	private MotherShip(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s) {
+	private MotherShip(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s) throws Exception_MS {
 		super(universe, watchers, x, y, s);
 		this.attackMode = true;
 		this.setName("MotherShip");
-		Ship.setDeathBeaviour(new PlayerDeath());
+		this.setDeathBeaviour(new PlayerDeath());
+		this.setFlyBehaviour(new PlayerFlight());
 		this.setShape(new ShipShape_Player());
 		brGroup = shipBranchGroup();
 	}

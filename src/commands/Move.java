@@ -5,7 +5,6 @@ import entities.Ship;
 public abstract class Move implements Runnable{
 	private Ship ship;
 	public abstract void undo();
-	public abstract void move();
 	
 	public Move(Ship sh){
 		this.ship = sh;

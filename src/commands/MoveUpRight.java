@@ -12,11 +12,6 @@ public class MoveUpRight extends Move {
 	public void undo() {
 		this.getShip().move("DL");
 	}
-	
-	@Override
-	public void move() {
-//		this.getShip().move("UR");
-	}
 
 	@Override
 	public void run() {

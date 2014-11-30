@@ -14,11 +14,6 @@ public class MoveDown extends Move {
 	}
 
 	@Override
-	public void move() {
-//		this.getShip().move("D");
-	}
-
-	@Override
 	public void run() {
 		try {
 			Thread.sleep(300);

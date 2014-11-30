@@ -11,6 +11,7 @@ import javax.vecmath.Vector3d;
 
 import SpaceGame.UniverseBuilder;
 import behaviours.DeathBehaviour;
+import behaviours.FlyBehaviour;
 
 public abstract class Ship implements Observable{
 	private Boolean alive;
@@ -32,7 +33,8 @@ public abstract class Ship implements Observable{
 	protected UniverseBuilder universe;
 	
 	// Strategy pattern
-	private static DeathBehaviour deathBeaviour;
+	private DeathBehaviour deathBeaviour;
+	private FlyBehaviour flyBehaviour;
 
 	public Ship(UniverseBuilder universe, ArrayList<Position> watchers,int x, int y, float s){
 		this.positions = watchers;
@@ -86,7 +88,7 @@ public abstract class Ship implements Observable{
 			this.y++;
 		}
 		notifyObservers();
-		updateShape();
+		this.flyBehaviour.fly(this);
 	}
 	
 	public BranchGroup shipBranchGroup() {
@@ -107,7 +109,7 @@ public abstract class Ship implements Observable{
 		getBrGroup().addChild(trGroup);
 		
 		// Get and reset the transform for the ship - determines where the ship is placed in space
-		Transform3D translate = moveShape();
+		Transform3D translate = this.getFlyBehaviour().moveShape(this);
 		trGroup.setTransform(translate);
 		
 		// Get the mesh for the ship
@@ -119,40 +121,6 @@ public abstract class Ship implements Observable{
 		// The branchgroup will be added to the scene and is rendered as this ships mesh 
 		// and all of its movements, animations, textures etc.
 		return getBrGroup();		
-	}
-	
-	public void updateShape() {
-		/*
-		 * This updates the graph scene node with new Translation for this entity
-		 */
-		TransformGroup thisGroup = (TransformGroup)this.getShape().getMesh().getParent();
-		// Add the current transform Node to the branch group
-		Transform3D mv = moveShape();
-		thisGroup.setTransform(mv);
-	}
-
-	public Transform3D moveShape(){
-		/*
-		 * Gets the current transform for this Ship based on its board position
-		 */
-		Transform3D translate = new Transform3D();
-		Transform3D rotate = new Transform3D();
-		
-		// Rotate first
-		if(this.getName() == "MotherShip") translate.rotY(-Math.PI/2);
-		else translate.rotY(Math.PI/2);
-		rotate.rotX(0.0);
-		translate.mul(rotate);
-		
-		// then translate
-		float sx = (float)this.getX() * TF_SCALE - (TF_SCALE * 1.5f);
-		float sz = (float)this.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		float sy = (float)this.getZ() * 0.6f;
-		Vector3d vt = new Vector3d(sx, sy, sz);
-		translate.setTranslation(vt);
-		translate.setScale(SIZE_SCALE);
-		
-		return translate;
 	}
 	
 	public void die() {
@@ -224,11 +192,19 @@ public abstract class Ship implements Observable{
 		this.universe = universe;
 	}
 
-	public static DeathBehaviour getDeathBeaviour() {
+	public DeathBehaviour getDeathBeaviour() {
 		return deathBeaviour;
 	}
 
-	public static void setDeathBeaviour(DeathBehaviour deathBeaviour) {
-		Ship.deathBeaviour = deathBeaviour;
+	public void setDeathBeaviour(DeathBehaviour deathBeaviour) {
+		this.deathBeaviour = deathBeaviour;
+	}
+
+	public FlyBehaviour getFlyBehaviour() {
+		return flyBehaviour;
+	}
+
+	public void setFlyBehaviour(FlyBehaviour flyBehaviour) {
+		this.flyBehaviour = flyBehaviour;
 	}
 }
