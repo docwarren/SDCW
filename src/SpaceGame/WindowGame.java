@@ -46,7 +46,9 @@ public class WindowGame extends Applet implements ActionListener{
 	public static void main(String[] args) throws Exception_MS, Exception_CM, Exception_MC{
 		WindowGame game = new WindowGame();
 		//MainFrame frame = 
-		new MainFrame(game, 800, 600);
+		new MainFrame(game, 1200, 680);
+		MusicPlayer player = new MusicPlayer();
+		player.start();
 	}	
 	
 	public WindowGame() throws Exception_MS, Exception_CM, Exception_MC {
