@@ -28,6 +28,8 @@ import graphics.Square;
 public class WindowGame extends Applet implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	// User interface Variables
+	private JButton mute = new JButton("Mute");
+	private boolean soundIsMute = false;
 	private JButton undo = new JButton("Undo");
 	private JButton move = new JButton("Move");
 	private JButton switchMode = new JButton("Switch Mode");
@@ -38,6 +40,9 @@ public class WindowGame extends Applet implements ActionListener{
 	private Canvas3D canvas;
 	private Text3D banner;
 	
+	// For music
+	private static MusicPlayer ipod;
+	
 	// Backend game machine variables
 	private MoveController mc;
 	private static MotherShip player;
@@ -47,8 +52,8 @@ public class WindowGame extends Applet implements ActionListener{
 		WindowGame game = new WindowGame();
 		//MainFrame frame = 
 		new MainFrame(game, 1200, 680);
-		MusicPlayer player = new MusicPlayer();
-		player.start();
+		ipod = new MusicPlayer();
+		ipod.play();
 	}	
 	
 	public WindowGame() throws Exception_MS, Exception_CM, Exception_MC {
@@ -65,6 +70,7 @@ public class WindowGame extends Applet implements ActionListener{
 		JPanel panel = new JPanel();
 		
 		// Handle click events
+		mute.addActionListener(this);
 		quit.addActionListener(this);
 		switchMode.addActionListener(this);
 		undo.addActionListener(this);
@@ -72,6 +78,7 @@ public class WindowGame extends Applet implements ActionListener{
 		
 		// Add the buttons to the UI
 		panel.add(quit);
+		panel.add(mute);
 		panel.add(switchMode);
 		panel.add(undo);
 		panel.add(move);
@@ -215,13 +222,17 @@ public class WindowGame extends Applet implements ActionListener{
 		 * Creates the board for players to play on
 		 */
 		TransformGroup board = new TransformGroup();
+		// MAXX by MAXY grid of squares
 		for(int x = 0; x < mc.getMaxX(); x++){
 			for(int y = 0; y < mc.getMaxY(); y++){
 				TransformGroup sqGroup = new TransformGroup();
+				// Each square is a square class
 				Square square;
+				// Every even numbered square is black
 				if( ( x + y ) % 2 == 0) square = new Square("white");
 				else square = new Square("black");
 				
+				// Put each square in the right place
 				Transform3D moveTo = new Transform3D();
 				float sx = ( x * mc.getScale() ) - (mc.getScale() * 1.5f);
 				float sz = ( y * mc.getScale() ) - (mc.getScale() * 2.0f);
@@ -271,6 +282,18 @@ public class WindowGame extends Applet implements ActionListener{
 			player.switchMode();
 			// and add a new Version of it, now that the mesh has changed
 			universe.addBranchGraph(player.shipBranchGroup());
+		}
+		else if(e.getSource() == mute){
+			if(soundIsMute){
+				ipod.play();
+				soundIsMute = false;
+				mute.setText("Mute");
+			}
+			else{
+				ipod.stop();
+				soundIsMute = true;
+				mute.setText("Play");
+			}
 		}
 	}
 }

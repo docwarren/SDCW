@@ -4,18 +4,26 @@ import java.io.*;
 
 import sun.audio.*;
 
-public class MusicPlayer extends Thread {
-
-	@Override
-	public void run() {
+public class MusicPlayer{
+	private AudioStream music;
+	
+	public void play() {
+		
+		// Music is Fools Rhythm by Two Fingers first heard here:
+		// https://vimeo.com/35244188
 		String file = "assets/music.wav";
+		
 		try {
 			InputStream fileIn = new FileInputStream(file);
-			AudioStream music = new AudioStream(fileIn);
+			music = new AudioStream(fileIn);
 			AudioPlayer.player.start(music);
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void stop(){
+		AudioPlayer.player.stop(music);
+	}
 }
