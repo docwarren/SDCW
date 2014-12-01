@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.7" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.7" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="commands.Move" project="SDCW" file="/SDCW/src/commands/Move.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="133" width="112" x="1640" y="37"/>    
+    <position height="-1" width="-1" x="504" y="1406"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="commands.MoveDown" project="SDCW" file="/SDCW/src/commands/MoveDown.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1913" y="67"/>    
+    <position height="-1" width="-1" x="460" y="1670"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="commands.MoveLeft" project="SDCW" file="/SDCW/src/commands/MoveLeft.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1447" y="61"/>    
+    <position height="-1" width="-1" x="288" y="1546"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="commands.MoveRight" project="SDCW" file="/SDCW/src/commands/MoveRight.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1779" y="446"/>    
+    <position height="-1" width="-1" x="665" y="1540"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="commands.MoveUp" project="SDCW" file="/SDCW/src/commands/MoveUp.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1640" y="410"/>    
+    <position height="-1" width="-1" x="289" y="1414"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="entities.BattleStar" project="SDCW" file="/SDCW/src/entities/BattleStar.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1656" y="831"/>    
+    <position height="-1" width="-1" x="1648" y="796"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="entities.BattleCruizer" project="SDCW" 
     file="/SDCW/src/entities/BattleCruizer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1663" y="738"/>    
+    <position height="-1" width="-1" x="1655" y="703"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="entities.Ship" project="SDCW" file="/SDCW/src/entities/Ship.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1234" y="648"/>    
+    <position height="-1" width="-1" x="1219" y="708"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="entities.BattleShooter" project="SDCW" 
     file="/SDCW/src/entities/BattleShooter.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1674" y="645"/>    
+    <position height="-1" width="-1" x="1659" y="609"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="entities.Position" project="SDCW" file="/SDCW/src/entities/Position.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="878" y="936"/>    
+    <position height="-1" width="-1" x="911" y="481"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="SpaceGame.WindowGame" project="SDCW" file="/SDCW/src/SpaceGame/WindowGame.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="517" y="250"/>    
+    <position height="-1" width="-1" x="448" y="235"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="graphics.ShipShape" project="SDCW" file="/SDCW/src/graphics/ShipShape.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1584" y="1084"/>    
+    <position height="-1" width="-1" x="1648" y="1079"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="graphics.ShipShape_Passive" project="SDCW" 
     file="/SDCW/src/graphics/ShipShape_Passive.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1841" y="1078"/>    
+    <position height="-1" width="-1" x="1901" y="1069"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="graphics.ShipShape_Enemy" project="SDCW" 
     file="/SDCW/src/graphics/ShipShape_Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1840" y="1194"/>    
+    <position height="-1" width="-1" x="1897" y="1184"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="SpaceGame.MoveController" project="SDCW" 
     file="/SDCW/src/SpaceGame/MoveController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="160" y="625"/>    
+    <position height="-1" width="-1" x="35" y="717"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -138,7 +138,7 @@
   </class>  
   <class id="16" language="java" name="SpaceGame.Ship_Factory" project="SDCW" 
     file="/SDCW/src/SpaceGame/Ship_Factory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="547" y="1090"/>    
+    <position height="-1" width="-1" x="781" y="791"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -147,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="SpaceGame.Move_Factory" project="SDCW" 
     file="/SDCW/src/SpaceGame/Move_Factory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="163" y="1109"/>    
+    <position height="-1" width="-1" x="30" y="1141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </class>  
   <class id="18" language="java" name="graphics.ShipShape_Player" project="SDCW" 
     file="/SDCW/src/graphics/ShipShape_Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1840" y="955"/>    
+    <position height="-1" width="-1" x="1901" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </class>  
   <class id="19" language="java" name="commands.MoveUpRight" project="SDCW" file="/SDCW/src/commands/MoveUpRight.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1914" y="318"/>    
+    <position height="-1" width="-1" x="664" y="1417"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -174,7 +174,7 @@
   </class>  
   <class id="20" language="java" name="commands.MoveUpLeft" project="SDCW" file="/SDCW/src/commands/MoveUpLeft.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1448" y="185"/>    
+    <position height="-1" width="-1" x="297" y="1290"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -183,7 +183,7 @@
   </class>  
   <class id="21" language="java" name="commands.MoveDownRight" project="SDCW" 
     file="/SDCW/src/commands/MoveDownRight.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1914" y="446"/>    
+    <position height="-1" width="-1" x="606" y="1671"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -192,7 +192,7 @@
   </class>  
   <class id="22" language="java" name="commands.MoveDownLeft" project="SDCW" file="/SDCW/src/commands/MoveDownLeft.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1921" y="194"/>    
+    <position height="-1" width="-1" x="319" y="1675"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -201,7 +201,7 @@
   </class>  
   <class id="23" language="java" name="entities.MotherShip" project="SDCW" file="/SDCW/src/entities/MotherShip.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="873" y="104"/>    
+    <position height="-1" width="-1" x="1224" y="224"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -210,7 +210,7 @@
   </class>  
   <class id="24" language="java" name="SpaceGame.UniverseBuilder" project="SDCW" 
     file="/SDCW/src/SpaceGame/UniverseBuilder.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="518" y="752"/>    
+    <position height="-1" width="-1" x="460" y="714"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -219,251 +219,452 @@
   </class>  
   <class id="25" language="java" name="graphics.Square" project="SDCW" file="/SDCW/src/graphics/Square.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="123" y="140"/>    
+    <position height="-1" width="-1" x="-48" y="110"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
+  <interface id="26" language="java" name="behaviours.DeathBehaviour" project="SDCW" 
+    file="/SDCW/src/behaviours/DeathBehaviour.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="911" y="1199"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="behaviours.EnemyDeath" project="SDCW" file="/SDCW/src/behaviours/EnemyDeath.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="980" y="1374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="behaviours.PlayerDeath" project="SDCW" 
+    file="/SDCW/src/behaviours/PlayerDeath.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="830" y="1375"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="behaviours.ShipFlight" project="SDCW" file="/SDCW/src/behaviours/ShipFlight.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1423" y="1356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="behaviours.PlayerFlight" project="SDCW" 
+    file="/SDCW/src/behaviours/PlayerFlight.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1223" y="1356"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="31" language="java" name="behaviours.FlyBehaviour" project="SDCW" 
+    file="/SDCW/src/behaviours/FlyBehaviour.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1311" y="1167"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="32" language="java" name="SpaceGame.turnSort" project="SDCW" file="/SDCW/src/SpaceGame/turnSort.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1225" y="70"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="SpaceGame.Turn" project="SDCW" file="/SDCW/src/SpaceGame/Turn.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="508" y="1086"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="SpaceGame.MusicPlayer" project="SDCW" file="/SDCW/src/SpaceGame/MusicPlayer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-32" y="305"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="35" language="java" name="entities.Observer" project="SDCW" file="/SDCW/src/entities/Observer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="684" y="463"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="36" language="java" name="entities.Observable" project="SDCW" file="/SDCW/src/entities/Observable.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1616" y="398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="37" language="java" name="java.lang.Runnable" project="SDCW" 
+    file="/usr/local/java/jdk1.8.0_05/jre/lib/rt.jar" binary="true" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="294" y="1132"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
-  <association id="27">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="28" name="universe">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </multiplicity>    
+  <association id="39">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="40" name="killedShips"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="30">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <generalization id="31">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <association id="32">    
+  <realization id="42">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="35"/>  
+  </realization>  
+  <realization id="43">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <association id="44">    
     <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="33" name="universe">        
-        <position height="0" width="0" x="16" y="-723"/>      
+      <attribute id="45" name="ships">        
+        <position height="0" width="0" x="-55" y="-189"/>      
       </attribute>      
-      <multiplicity id="34" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
+      <multiplicity id="46" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-55" y="-189"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="47">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="48">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="49" name="uniqueInstance">        
+        <position height="0" width="0" x="377" y="-947"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="377" y="-947"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="52" name="universe">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="35">    
+  <generalization id="54">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="55">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="56" name="universe">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="59" name="universe">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </attribute>      
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="61">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="63">    
+    <end type="SOURCE" refId="24" navigable="true">      
+      <attribute id="64" name="livingShips">        
+        <position height="0" width="0" x="211" y="-180"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="211" y="-180"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true">      
+      <attribute id="66" name="universe">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </attribute>      
+      <multiplicity id="67" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </multiplicity>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="68">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="36">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="37">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="38" name="universe">        
-        <position height="0" width="0" x="16" y="-723"/>      
+  <realization id="69">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="37"/>  
+  </realization>  
+  <association id="70">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="71" name="deathBeaviour">        
+        <position height="17" width="77" x="860" y="1131"/>      
       </attribute>      
-      <multiplicity id="39" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="74" name="uniqueInstance">        
+        <position height="0" width="0" x="-42" y="-761"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="41" name="mc">        
-        <position height="0" width="0" x="-51" y="-403"/>      
+  <realization id="76">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="35"/>  
+  </realization>  
+  <association id="77">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="78" name="universe">        
+        <position height="0" width="0" x="-42" y="-761"/>      
       </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-51" y="-403"/>      
+      <multiplicity id="79" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-42" y="-761"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
+  <generalization id="80">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="81">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="82">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="44" name="mvFactory">        
-        <position height="0" width="0" x="-25" y="-407"/>      
+      <attribute id="83" name="mvFactory">        
+        <position height="0" width="0" x="-158" y="-375"/>      
       </attribute>      
-      <multiplicity id="45" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-25" y="-407"/>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-158" y="-375"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="46">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="47" name="uniqueInstance">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </attribute>      
-      <multiplicity id="48" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </multiplicity>    
+  <association id="85">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="86" name="ipod"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
+    <end type="TARGET" refId="34" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="49">    
+  <association id="88">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="89" name="moves"/>      
+      <multiplicity id="90" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="92">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <generalization id="50">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="1"/>  
+  <generalization id="93">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="12"/>  
   </generalization>  
-  <association id="51">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="52" name="uniqueInstance">        
-        <position height="0" width="0" x="26" y="-1067"/>      
-      </attribute>      
-      <multiplicity id="53" minimum="0" maximum="1">        
-        <position height="0" width="0" x="26" y="-1067"/>      
-      </multiplicity>    
+  <association id="94">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="95" name="player"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="54">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="55">    
-    <end type="SOURCE" refId="13"/>    
+  <association id="97">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="98" name="flyBehaviour"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="100">    
+    <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="12"/>  
   </generalization>  
-  <association id="56">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="57" name="livingShips">        
-        <position height="0" width="0" x="226" y="-240"/>      
-      </attribute>      
-      <multiplicity id="58" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="226" y="-240"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
+  <association id="101">    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="60" name="universe">        
-        <position height="0" width="0" x="16" y="-723"/>      
+      <attribute id="102" name="mc">        
+        <position height="0" width="0" x="-176" y="-311"/>      
       </attribute>      
-      <multiplicity id="61" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="62">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="63">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="64" name="ships">        
-        <position height="0" width="0" x="-40" y="-249"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-40" y="-249"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="66">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="67" name="ship">        
-        <position height="0" width="0" x="-40" y="-249"/>      
-      </attribute>      
-      <multiplicity id="68" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-40" y="-249"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="69">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="70" name="universe">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </attribute>      
-      <multiplicity id="71" minimum="0" maximum="1">        
-        <position height="0" width="0" x="16" y="-723"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="72">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="73" name="uniqueInstance">        
-        <position height="0" width="0" x="-51" y="-403"/>      
-      </attribute>      
-      <multiplicity id="74" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-51" y="-403"/>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-176" y="-311"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="75">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <generalization id="76">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <generalization id="77">    
+  <generalization id="104">    
     <end type="SOURCE" refId="23"/>    
     <end type="TARGET" refId="8"/>  
   </generalization>  
-  <generalization id="78">    
+  <association id="105">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="106" name="turns"/>      
+      <multiplicity id="107" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="108">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="109" name="newShip"/>      
+      <multiplicity id="110" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="111">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="8"/>  
   </generalization>  
-  <association id="79">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="80" name="player">        
-        <position height="0" width="0" x="26" y="-1067"/>      
+  <generalization id="112">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <realization id="113">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <generalization id="114">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </generalization>  
+  <generalization id="115">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <realization id="116">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="31"/>  
+  </realization>  
+  <association id="117">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="118" name="uniqueInstance">        
+        <position height="0" width="0" x="-176" y="-311"/>      
       </attribute>      
-      <multiplicity id="81" minimum="0" maximum="1">        
-        <position height="0" width="0" x="26" y="-1067"/>      
+      <multiplicity id="119" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-176" y="-311"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="121" name="player">        
+        <position height="0" width="0" x="377" y="-947"/>      
+      </attribute>      
+      <multiplicity id="122" minimum="0" maximum="1">        
+        <position height="0" width="0" x="377" y="-947"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="82">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="83">    
+  <association id="123">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="84" name="shape">        
-        <position height="0" width="0" x="280" y="-214"/>      
+      <attribute id="124" name="shape">        
+        <position height="0" width="0" x="344" y="-219"/>      
       </attribute>      
-      <multiplicity id="85" minimum="0" maximum="1">        
-        <position height="0" width="0" x="280" y="-214"/>      
+      <multiplicity id="125" minimum="0" maximum="1">        
+        <position height="0" width="0" x="344" y="-219"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="127" name="ship">        
+        <position height="0" width="0" x="-55" y="-189"/>      
+      </attribute>      
+      <multiplicity id="128" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-55" y="-189"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

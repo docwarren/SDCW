@@ -12,9 +12,10 @@ public class ShipShape_Star extends ShipShape {
 	public Appearance getAppearance(){
 		Appearance a = new Appearance();
 		// Set a material manually
-		Color3f ambient = rgbToCol3f(77, 59, 225);
-		Color3f diffuse = rgbToCol3f(77, 59, 225);
+		Color3f ambient = rgbToCol3f(20, 20, 20);
+		Color3f diffuse = rgbToCol3f(20, 20, 20);
 		Color3f specular = rgbToCol3f(241, 255, 204);
+
 		Color3f emissive = new Color3f(0.0f, 0.0f, 0.0f);
 		float shiny = 10.0f;
 		Material material = new Material(ambient, emissive, diffuse, specular, shiny);

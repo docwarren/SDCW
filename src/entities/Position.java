@@ -28,6 +28,7 @@ public class Position implements Observer{
 			ships.add(ship);
 			if(ship.getName().equals("MotherShip")){
 				player = true;
+				fight();
 			}
 		}
 	}
