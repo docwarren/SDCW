@@ -70,7 +70,7 @@ public class WindowGame extends Applet implements ActionListener{
 	public static void main(String[] args) throws Exception_MS, Exception_MC{
 		WindowGame game = new WindowGame();
 		//MainFrame frame = 
-		new MainFrame(game, 1200, 680);
+		new MainFrame(game, 900, 680);
 		ipod = new MusicPlayer();
 		ipod.play();
 	}	
