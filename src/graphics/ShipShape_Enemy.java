@@ -12,8 +12,8 @@ public class ShipShape_Enemy extends ShipShape {
 	public Appearance getAppearance(){
 		Appearance a = new Appearance();
 		// Set a material manually
-		Color3f ambient = rgbToCol3f(255, 129, 107);
-		Color3f diffuse = rgbToCol3f(194, 19, 0);
+		Color3f ambient = rgbToCol3f(142, 10, 6);
+		Color3f diffuse = rgbToCol3f(142, 10, 6);
 		Color3f specular = rgbToCol3f(241, 255, 204);
 		Color3f emissive = new Color3f(0.0f, 0.0f, 0.0f);
 		float shiny = 10.0f;

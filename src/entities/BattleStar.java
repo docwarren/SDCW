@@ -1,6 +1,6 @@
 package entities;
 
-import graphics.ShipShape_Enemy;
+import graphics.ShipShape_Star;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class BattleStar extends Ship {
 		this.setDeathBeaviour(new EnemyDeath());
 		this.setFlyBehaviour(new ShipFlight());
 		// Set the 3D objects associated with the ship
-		this.setShape(new ShipShape_Enemy());
+		this.setShape(new ShipShape_Star());
 		brGroup = shipBranchGroup();
 	}
 }
