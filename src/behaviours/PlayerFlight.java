@@ -4,7 +4,6 @@ import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Vector3d;
 
-import entities.MotherShip;
 import entities.Ship;
 
 public class PlayerFlight implements FlyBehaviour {
@@ -17,13 +16,13 @@ public class PlayerFlight implements FlyBehaviour {
 		/*
 		 * This updates the graph scene node with new Translation for this entity
 		 */
-		ship = (MotherShip) ship;
 		TransformGroup thisGroup = (TransformGroup)ship.getShape().getMesh().getParent();
 		// Add the current transform Node to the branch group
 		Transform3D mv = moveShape(ship);
         thisGroup.setTransform(mv);                                                                                                                                                                                                                            
 	}
 
+	@Override
 	public Transform3D moveShape(Ship ship){
 		/*
 		 * Gets the current transform for this Ship based on its board position
@@ -37,9 +36,9 @@ public class PlayerFlight implements FlyBehaviour {
 		translate.mul(rotate);
 		
 		// then translate
-		float sx = (float)ship.getX() * TF_SCALE - (TF_SCALE * 1.5f);
-		float sz = (float)ship.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		float sy = (float)ship.getZ() * 0.6f;
+		float sx = ship.getX() * TF_SCALE - (TF_SCALE * 1.5f);
+		float sz = ship.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
+		float sy = ship.getZ() * 0.6f;
 		Vector3d vt = new Vector3d(sx, sy, sz);
 		translate.setTranslation(vt);
 		translate.setScale(SIZE_SCALE);

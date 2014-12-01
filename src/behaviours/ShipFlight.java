@@ -22,6 +22,7 @@ public class ShipFlight implements FlyBehaviour {
         thisGroup.setTransform(mv);                                                                                                                                                                                                                            
 	}
 
+	@Override
 	public Transform3D moveShape(Ship ship){
 		/*
 		 * Gets the current transform for this Ship based on its board position
@@ -35,9 +36,9 @@ public class ShipFlight implements FlyBehaviour {
 		translate.mul(rotate);
 		
 		// then translate
-		float sx = (float)ship.getX() * TF_SCALE - (TF_SCALE * 1.5f);
-		float sz = (float)ship.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
-		float sy = (float)ship.getZ() * 0.6f;
+		float sx = ship.getX() * TF_SCALE - (TF_SCALE * 1.5f);
+		float sz = ship.getY() * TF_SCALE - ( TF_SCALE * 2.0f);
+		float sy = ship.getZ() * 0.6f;
 		Vector3d vt = new Vector3d(sx, sy, sz);
 		translate.setTranslation(vt);
 		translate.setScale(SIZE_SCALE);

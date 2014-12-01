@@ -1,7 +1,6 @@
 package graphics;
 
 import javax.media.j3d.Appearance;
-import javax.media.j3d.ColoringAttributes;
 import javax.media.j3d.Material;
 import javax.media.j3d.TransparencyAttributes;
 import javax.vecmath.Color3f;
@@ -37,7 +36,7 @@ public class Square {
 		// Make it slightly transparent
 		// From here: http://www.vrupl.evl.uic.edu/LabAccidents/java3d/lesson07/index.html
 		TransparencyAttributes ta = new TransparencyAttributes();
-		ta.setTransparencyMode(ta.BLENDED);
+		ta.setTransparencyMode(TransparencyAttributes.BLENDED);
 		ta.setTransparency(0.5f);
 		a.setTransparencyAttributes(ta);		
 		

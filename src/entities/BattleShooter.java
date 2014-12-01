@@ -4,9 +4,9 @@ import graphics.ShipShape_Enemy;
 
 import java.util.ArrayList;
 
+import SpaceGame.UniverseBuilder;
 import behaviours.EnemyDeath;
 import behaviours.ShipFlight;
-import SpaceGame.UniverseBuilder;
 
 public class BattleShooter extends Ship {
 

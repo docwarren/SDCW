@@ -1,8 +1,5 @@
 package SpaceGame;
 
-import entities.Observer;
-import entities.Ship;
-
 import java.util.ArrayList;
 
 import javax.media.j3d.BranchGroup;
@@ -16,6 +13,9 @@ import javax.media.j3d.View;
 import javax.media.j3d.ViewPlatform;
 import javax.media.j3d.VirtualUniverse;
 import javax.vecmath.Vector3d;
+
+import entities.Observer;
+import entities.Ship;
 
 public class UniverseBuilder extends Object implements Observer{
 	private VirtualUniverse world;		// World for everything

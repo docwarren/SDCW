@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.media.j3d.Appearance;
+import javax.media.j3d.GeometryArray;
 import javax.media.j3d.IndexedTriangleArray;
 import javax.media.j3d.Material;
 import javax.media.j3d.Shape3D;
@@ -33,7 +34,7 @@ public abstract class ShipShape{
 		normalIndices = new ArrayList<Integer>();
 		this.processFile(ASSETDIR + "SS2.obj");		
 		
-		ship = new IndexedTriangleArray(normals.size(),IndexedTriangleArray.NORMALS|IndexedTriangleArray.COORDINATES, faceIndices.size());
+		ship = new IndexedTriangleArray(normals.size(),GeometryArray.NORMALS|GeometryArray.COORDINATES, faceIndices.size());
 		ship.setCoordinates(0, vertexArray);
 		ship.setCoordinateIndices(0, faceIndArray);
 		

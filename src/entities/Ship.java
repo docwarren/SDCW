@@ -1,9 +1,11 @@
 package entities;
+
 import graphics.ShipShape;
 
 import java.util.ArrayList;
 
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Group;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.TransformGroup;
 
@@ -95,13 +97,13 @@ public abstract class Ship implements Observable{
 		 */
 		setBrGroup(new BranchGroup());
 		getBrGroup().setCapability(BranchGroup.ALLOW_DETACH);// so that we can remove it from the scene later
-		getBrGroup().setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
+		getBrGroup().setCapability(Group.ALLOW_CHILDREN_WRITE);
 		TransformGroup trGroup = new TransformGroup();
 		
 		// Set the capability bit so that we can move this ship after it is live
 		trGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);	// so that we can modify it
-		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_WRITE);		// so that we can add more transformations
-		trGroup.setCapability(TransformGroup.ALLOW_CHILDREN_READ);		// So we can get the mesh		
+		trGroup.setCapability(Group.ALLOW_CHILDREN_WRITE);		// so that we can add more transformations
+		trGroup.setCapability(Group.ALLOW_CHILDREN_READ);		// So we can get the mesh		
 		
 		// Add the trandformGroup to the root branch
 		getBrGroup().addChild(trGroup);

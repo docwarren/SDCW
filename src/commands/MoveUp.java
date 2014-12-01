@@ -8,6 +8,7 @@ public class MoveUp extends Move {
 		super(sh);
 	}
 	
+	@Override
 	public void undo(){
 		this.getShip().move("D");
 	}

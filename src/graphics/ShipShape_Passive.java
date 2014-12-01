@@ -8,6 +8,7 @@ public class ShipShape_Passive extends ShipShape{
 
 	public ShipShape_Passive() {}
 	
+	@Override
 	public Appearance getAppearance(){
 		Appearance a = new Appearance();
 		// Set a material manually

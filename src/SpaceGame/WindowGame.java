@@ -1,11 +1,29 @@
 package SpaceGame;
 
 import java.applet.Applet;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.media.j3d.*;
+import javax.media.j3d.AmbientLight;
+import javax.media.j3d.Appearance;
+import javax.media.j3d.Background;
+import javax.media.j3d.BoundingSphere;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.Font3D;
+import javax.media.j3d.FontExtrusion;
+import javax.media.j3d.Group;
+import javax.media.j3d.ImageComponent2D;
+import javax.media.j3d.Material;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Text3D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.vecmath.Color3f;
@@ -26,7 +44,7 @@ import graphics.Square;
 // www.computing.northampton.ac.uk/~gary/csy3019/CSY3019SectionD.html
 
 public class WindowGame extends Applet implements ActionListener{
-	private static String ASSETDIR = "src/assets";
+	private static String ASSETDIR = "src/assets/";
 	private static final long serialVersionUID = 1L;
 	// User interface Variables
 	private JButton mute = new JButton("Mute");
@@ -103,9 +121,9 @@ public class WindowGame extends Applet implements ActionListener{
 	public BranchGroup createScene(){
 		BranchGroup rootNode = new BranchGroup();
 		rootNode.setCapability(BranchGroup.ALLOW_DETACH);
-		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_READ);
-		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
-		rootNode.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
+		rootNode.setCapability(Group.ALLOW_CHILDREN_READ);
+		rootNode.setCapability(Group.ALLOW_CHILDREN_WRITE);
+		rootNode.setCapability(Group.ALLOW_CHILDREN_EXTEND);
 		// Add the banner
 		TransformGroup textGroup = getBanner();
 		rootNode.addChild(textGroup);

@@ -2,6 +2,11 @@ package SpaceGame;
 
 public class Exception_MS extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public Exception_MS() {
 		// TODO Auto-generated constructor stub
 	}

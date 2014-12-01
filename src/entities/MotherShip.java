@@ -5,10 +5,10 @@ import graphics.ShipShape_Player;
 
 import java.util.ArrayList;
 
-import behaviours.PlayerDeath;
-import behaviours.PlayerFlight;
 import SpaceGame.Exception_MS;
 import SpaceGame.UniverseBuilder;
+import behaviours.PlayerDeath;
+import behaviours.PlayerFlight;
 
 public class MotherShip extends Ship {
 	private Boolean attackMode;

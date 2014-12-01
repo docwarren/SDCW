@@ -1,8 +1,11 @@
 package SpaceGame;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
-import sun.audio.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 public class MusicPlayer{
 	private AudioStream music;
