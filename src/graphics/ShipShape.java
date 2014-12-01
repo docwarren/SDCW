@@ -14,6 +14,7 @@ import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
 public abstract class ShipShape{
+	private static String ASSETDIR = "src/assets/";
 	private ArrayList<Point3f> vertices;
 	private ArrayList<Vector3f> normals;
 	private ArrayList<Integer> faceIndices;
@@ -30,7 +31,7 @@ public abstract class ShipShape{
 		normals = new ArrayList<Vector3f>();
 		faceIndices = new ArrayList<Integer>();
 		normalIndices = new ArrayList<Integer>();
-		this.processFile("assets/SS2.obj");		
+		this.processFile(ASSETDIR + "SS2.obj");		
 		
 		ship = new IndexedTriangleArray(normals.size(),IndexedTriangleArray.NORMALS|IndexedTriangleArray.COORDINATES, faceIndices.size());
 		ship.setCoordinates(0, vertexArray);

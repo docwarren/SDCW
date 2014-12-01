@@ -4,12 +4,8 @@ import graphics.ShipShape;
 import java.util.ArrayList;
 
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.PositionInterpolator;
-import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Shape3D;
-import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.vecmath.Vector3d;
 
 import SpaceGame.UniverseBuilder;
 import behaviours.DeathBehaviour;

@@ -11,7 +11,7 @@ public class MusicPlayer{
 		
 		// Music is Fools Rhythm by Two Fingers first heard here:
 		// https://vimeo.com/35244188
-		String file = "assets/music.wav";
+		String file = "src/assets/music.wav";
 		
 		try {
 			InputStream fileIn = new FileInputStream(file);

@@ -26,6 +26,7 @@ import graphics.Square;
 // www.computing.northampton.ac.uk/~gary/csy3019/CSY3019SectionD.html
 
 public class WindowGame extends Applet implements ActionListener{
+	private static String ASSETDIR = "src/assets";
 	private static final long serialVersionUID = 1L;
 	// User interface Variables
 	private JButton mute = new JButton("Mute");
@@ -48,7 +49,7 @@ public class WindowGame extends Applet implements ActionListener{
 	private static MotherShip player;
 	
 	// Start the game
-	public static void main(String[] args) throws Exception_MS, Exception_CM, Exception_MC{
+	public static void main(String[] args) throws Exception_MS, Exception_MC{
 		WindowGame game = new WindowGame();
 		//MainFrame frame = 
 		new MainFrame(game, 1200, 680);
@@ -56,7 +57,7 @@ public class WindowGame extends Applet implements ActionListener{
 		ipod.play();
 	}	
 	
-	public WindowGame() throws Exception_MS, Exception_CM, Exception_MC {
+	public WindowGame() throws Exception_MS, Exception_MC {
 		/*
 		 * Instantiates a new Window Space Game
 		 */
@@ -174,7 +175,7 @@ public class WindowGame extends Applet implements ActionListener{
 		 * http://hdw.eweb4.com/search/galaxy/
 		 * and here: http://apod.nasa.gov/apod/image/1411/TulipNebulaMetsavainio.jpg
 		 */
-		TextureLoader tl = new TextureLoader("assets/space2.jpg", this);
+		TextureLoader tl = new TextureLoader(ASSETDIR + "/space2.jpg", this);
 		ImageComponent2D myBackGround = tl.getImage();
 		Background bg = new Background();
 		BoundingSphere worldBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 1000.0);
